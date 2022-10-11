@@ -46,9 +46,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SideTripleShoot"",
+                    ""name"": ""RightSideTripleShoot"",
                     ""type"": ""Button"",
                     ""id"": ""1a7c8eb2-4504-4b96-9f31-2d138d558080"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftSideTripleShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a5787d0-cca2-4caa-a937-c2423cba78b0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -123,7 +132,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3a7d962c-9286-4745-8259-89ad300af0fc"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -134,11 +143,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7f61d283-066f-4b73-872d-1d4e705ece92"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SideTripleShoot"",
+                    ""action"": ""RightSideTripleShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -152,6 +161,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""PauseGameInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a7a43b8-5375-4ef6-83fd-e96502f4d315"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftSideTripleShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -162,7 +182,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerInputs = asset.FindActionMap("PlayerInputs", throwIfNotFound: true);
         m_PlayerInputs_Movement = m_PlayerInputs.FindAction("Movement", throwIfNotFound: true);
         m_PlayerInputs_FrontalSingleShoot = m_PlayerInputs.FindAction("FrontalSingleShoot", throwIfNotFound: true);
-        m_PlayerInputs_SideTripleShoot = m_PlayerInputs.FindAction("SideTripleShoot", throwIfNotFound: true);
+        m_PlayerInputs_RightSideTripleShoot = m_PlayerInputs.FindAction("RightSideTripleShoot", throwIfNotFound: true);
+        m_PlayerInputs_LeftSideTripleShoot = m_PlayerInputs.FindAction("LeftSideTripleShoot", throwIfNotFound: true);
         m_PlayerInputs_PauseGameInput = m_PlayerInputs.FindAction("PauseGameInput", throwIfNotFound: true);
     }
 
@@ -225,7 +246,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerInputsActions m_PlayerInputsActionsCallbackInterface;
     private readonly InputAction m_PlayerInputs_Movement;
     private readonly InputAction m_PlayerInputs_FrontalSingleShoot;
-    private readonly InputAction m_PlayerInputs_SideTripleShoot;
+    private readonly InputAction m_PlayerInputs_RightSideTripleShoot;
+    private readonly InputAction m_PlayerInputs_LeftSideTripleShoot;
     private readonly InputAction m_PlayerInputs_PauseGameInput;
     public struct PlayerInputsActions
     {
@@ -233,7 +255,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public PlayerInputsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerInputs_Movement;
         public InputAction @FrontalSingleShoot => m_Wrapper.m_PlayerInputs_FrontalSingleShoot;
-        public InputAction @SideTripleShoot => m_Wrapper.m_PlayerInputs_SideTripleShoot;
+        public InputAction @RightSideTripleShoot => m_Wrapper.m_PlayerInputs_RightSideTripleShoot;
+        public InputAction @LeftSideTripleShoot => m_Wrapper.m_PlayerInputs_LeftSideTripleShoot;
         public InputAction @PauseGameInput => m_Wrapper.m_PlayerInputs_PauseGameInput;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInputs; }
         public void Enable() { Get().Enable(); }
@@ -250,9 +273,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @FrontalSingleShoot.started -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnFrontalSingleShoot;
                 @FrontalSingleShoot.performed -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnFrontalSingleShoot;
                 @FrontalSingleShoot.canceled -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnFrontalSingleShoot;
-                @SideTripleShoot.started -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnSideTripleShoot;
-                @SideTripleShoot.performed -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnSideTripleShoot;
-                @SideTripleShoot.canceled -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnSideTripleShoot;
+                @RightSideTripleShoot.started -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnRightSideTripleShoot;
+                @RightSideTripleShoot.performed -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnRightSideTripleShoot;
+                @RightSideTripleShoot.canceled -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnRightSideTripleShoot;
+                @LeftSideTripleShoot.started -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnLeftSideTripleShoot;
+                @LeftSideTripleShoot.performed -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnLeftSideTripleShoot;
+                @LeftSideTripleShoot.canceled -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnLeftSideTripleShoot;
                 @PauseGameInput.started -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnPauseGameInput;
                 @PauseGameInput.performed -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnPauseGameInput;
                 @PauseGameInput.canceled -= m_Wrapper.m_PlayerInputsActionsCallbackInterface.OnPauseGameInput;
@@ -266,9 +292,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @FrontalSingleShoot.started += instance.OnFrontalSingleShoot;
                 @FrontalSingleShoot.performed += instance.OnFrontalSingleShoot;
                 @FrontalSingleShoot.canceled += instance.OnFrontalSingleShoot;
-                @SideTripleShoot.started += instance.OnSideTripleShoot;
-                @SideTripleShoot.performed += instance.OnSideTripleShoot;
-                @SideTripleShoot.canceled += instance.OnSideTripleShoot;
+                @RightSideTripleShoot.started += instance.OnRightSideTripleShoot;
+                @RightSideTripleShoot.performed += instance.OnRightSideTripleShoot;
+                @RightSideTripleShoot.canceled += instance.OnRightSideTripleShoot;
+                @LeftSideTripleShoot.started += instance.OnLeftSideTripleShoot;
+                @LeftSideTripleShoot.performed += instance.OnLeftSideTripleShoot;
+                @LeftSideTripleShoot.canceled += instance.OnLeftSideTripleShoot;
                 @PauseGameInput.started += instance.OnPauseGameInput;
                 @PauseGameInput.performed += instance.OnPauseGameInput;
                 @PauseGameInput.canceled += instance.OnPauseGameInput;
@@ -280,7 +309,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnFrontalSingleShoot(InputAction.CallbackContext context);
-        void OnSideTripleShoot(InputAction.CallbackContext context);
+        void OnRightSideTripleShoot(InputAction.CallbackContext context);
+        void OnLeftSideTripleShoot(InputAction.CallbackContext context);
         void OnPauseGameInput(InputAction.CallbackContext context);
     }
 }

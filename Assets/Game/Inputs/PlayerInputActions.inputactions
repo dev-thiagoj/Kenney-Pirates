@@ -24,9 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SideTripleShoot",
+                    "name": "RightSideTripleShoot",
                     "type": "Button",
                     "id": "1a7c8eb2-4504-4b96-9f31-2d138d558080",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftSideTripleShoot",
+                    "type": "Button",
+                    "id": "5a5787d0-cca2-4caa-a937-c2423cba78b0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -101,7 +110,7 @@
                 {
                     "name": "",
                     "id": "3a7d962c-9286-4745-8259-89ad300af0fc",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -112,11 +121,11 @@
                 {
                     "name": "",
                     "id": "7f61d283-066f-4b73-872d-1d4e705ece92",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SideTripleShoot",
+                    "action": "RightSideTripleShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PauseGameInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a7a43b8-5375-4ef6-83fd-e96502f4d315",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSideTripleShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
