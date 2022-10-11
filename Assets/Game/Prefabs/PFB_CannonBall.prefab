@@ -63,7 +63,7 @@ MonoBehaviour:
   damageAmount: 1
   speed: 10
   tagsToHit: []
-  tagToIgnore: 
+  tagToIgnore: Player
 --- !u!1 &3145714737482289069
 GameObject:
   m_ObjectHideFlags: 0

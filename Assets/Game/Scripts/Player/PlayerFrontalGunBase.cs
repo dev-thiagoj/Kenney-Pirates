@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFrontalGunBase : GunBase
+public class PlayerFrontalGunBase : MonoBehaviour
 {
-    public Transform gunPosition;
-
-    public float shootCooldown = 3;
-    float timer = 0;
+    public GunBase gunBase;
 
     protected PlayerInputActions inputs;
 
@@ -21,6 +16,11 @@ public class PlayerFrontalGunBase : GunBase
         inputs.Disable();
     }
 
+    private void OnValidate()
+    {
+        gunBase = GetComponentInParent<GunBase>();
+    }
+
     private void Awake()
     {
         inputs = new PlayerInputActions();
@@ -28,17 +28,16 @@ public class PlayerFrontalGunBase : GunBase
         inputs.PlayerInputs.FrontalSingleShoot.performed += ctx => StartShoot();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (timer > 0) timer -= Time.deltaTime;
+        if (gunBase == null) gunBase = GameObject.Find("FrontalShootPoint").GetComponent<GunBase>();
     }
 
     private void StartShoot()
     {
-        if (timer <= 0)
+        if (gunBase.timer <= 0)
         {
-            timer = shootCooldown;
-            Shoot(this.transform);
+            gunBase.Shoot(this.transform);
         }
     }
 }

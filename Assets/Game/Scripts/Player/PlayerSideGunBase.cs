@@ -1,30 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerSideGunBase : GunBase
+public class PlayerSideGunBase : MonoBehaviour
 {
-    public GunBase gunBase;
-    public List<Transform> leftGunsPositions;
-    public List<Transform> rightGunsPositions;
+    [SerializeField] GunBase gunBase;
 
-    public float shootCooldown = 3;
-    float timer = 0;
+    [SerializeField] List<Transform> leftGunsPositions;
+    [SerializeField] List<Transform> rightGunsPositions;
 
     protected PlayerInputActions inputs;
 
-    private void OnEnable()
+    void OnEnable()
     {
         inputs.Enable();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         inputs.Disable();
     }
 
-    private void Awake()
+    void OnValidate()
+    {
+        if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
+    }
+
+    void Awake()
     {
         inputs = new PlayerInputActions();
 
@@ -32,19 +34,30 @@ public class PlayerSideGunBase : GunBase
         inputs.PlayerInputs.LeftSideTripleShoot.performed += ctx => StartShoot(true);
     }
 
-    private void Update()
+    void StartShoot(bool isLeftSide)
     {
-        if (timer > 0) timer -= Time.deltaTime;
-    }
-
-    private void StartShoot(bool isLeftSide)
-    {
-        if (timer <= 0)
+        if (gunBase.timer <= 0)
         {
-            timer = shootCooldown;
-            //gunBase.Shoot();
-            StartCoroutine(ShootCoroutine(isLeftSide));
+            //StartCoroutine(ShootCoroutine(isLeftSide));
+            if (isLeftSide)
+            {
+                foreach (var cannon in leftGunsPositions)
+                {
+                    var pos = cannon.transform;
+                    gunBase.Shoot(pos);
+                }
+            }
+
+            if (!isLeftSide)
+            {
+                foreach (var cannon in rightGunsPositions)
+                {
+                    var pos = cannon.transform;
+                    gunBase.Shoot(pos);
+                }
+            }
         }
+        else return;
     }
 
     IEnumerator ShootCoroutine(bool isLeftSide)
@@ -54,7 +67,7 @@ public class PlayerSideGunBase : GunBase
             foreach (var cannon in leftGunsPositions)
             {
                 var pos = cannon.transform;
-                Shoot(pos);
+                gunBase.Shoot(pos);
             }
         }
 
@@ -63,7 +76,7 @@ public class PlayerSideGunBase : GunBase
             foreach (var cannon in rightGunsPositions)
             {
                 var pos = cannon.transform;
-                Shoot(pos);
+                gunBase.Shoot(pos);
             }
         }
 
