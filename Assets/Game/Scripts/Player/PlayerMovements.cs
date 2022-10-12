@@ -8,14 +8,14 @@ public class PlayerMovements : MonoBehaviour
     public CharacterController characterController;
 
     [Header("Movement Speed")]
-    public float playerDefaultSpeed = 1f;
+    [Range(0, 3)] public float playerDefaultSpeed = 1f;
     float _currPlayerSpeed;
 
     [Header("Slow")]
     public float desacelerationTime;
 
     [Header("Rotate Speed")]
-    public float rotationDefaultSpeed = 2f;
+    [Range(0, 3)] public float rotationDefaultSpeed = 2f;
     float _currRotationSpeed;
 
     protected PlayerInputActions playerInputs;
@@ -44,6 +44,8 @@ public class PlayerMovements : MonoBehaviour
     {
         _currPlayerSpeed = playerDefaultSpeed;
         _currRotationSpeed = rotationDefaultSpeed;
+
+        Debug.Log("Fazer a aceleração e desaceleração dos barcos");
     }
 
     private void FixedUpdate()

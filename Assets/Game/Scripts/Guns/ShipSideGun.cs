@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSideGunBase : MonoBehaviour
+public class ShipSideGun : MonoBehaviour
 {
     [SerializeField] GunBase gunBase;
 
@@ -38,7 +38,6 @@ public class PlayerSideGunBase : MonoBehaviour
     {
         if (gunBase.timer <= 0)
         {
-            //StartCoroutine(ShootCoroutine(isLeftSide));
             if (isLeftSide)
             {
                 foreach (var cannon in leftGunsPositions)
@@ -57,10 +56,10 @@ public class PlayerSideGunBase : MonoBehaviour
                 }
             }
         }
-        else return;
+        //else return;
     }
 
-    IEnumerator ShootCoroutine(bool isLeftSide)
+    /*IEnumerator ShootCoroutine(bool isLeftSide)
     {
         if (isLeftSide)
         {
@@ -81,5 +80,5 @@ public class PlayerSideGunBase : MonoBehaviour
         }
 
         yield return null;
-    }
+    }*/
 }

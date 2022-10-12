@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
+    public bool isPlayer;
+
     [Range(0, 5)] public float shootCooldown;
 
     [Header("VFX")]
@@ -17,6 +19,7 @@ public class GunBase : MonoBehaviour
     AudioSource audioSource;
 
     [HideInInspector] public float timer = 0;
+
 
     private void Update()
     {
@@ -37,7 +40,7 @@ public class GunBase : MonoBehaviour
         //SFXPool.Instance.Play(sfxType);
     }
 
-    IEnumerator VFXCoroutine(Transform pos)
+    public IEnumerator VFXCoroutine(Transform pos)
     {
         var vfx = Instantiate(shootVFX).transform;
         vfx.SetParent(pos);

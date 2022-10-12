@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerFrontalGunBase : MonoBehaviour
+public class ShipFrontalGun : MonoBehaviour
 {
     public GunBase gunBase;
 
@@ -25,7 +25,7 @@ public class PlayerFrontalGunBase : MonoBehaviour
     {
         inputs = new PlayerInputActions();
 
-        inputs.PlayerInputs.FrontalSingleShoot.performed += ctx => StartShoot();
+        if (gunBase.isPlayer) inputs.PlayerInputs.FrontalSingleShoot.performed += ctx => StartShoot();
     }
 
     private void Start()
@@ -33,11 +33,23 @@ public class PlayerFrontalGunBase : MonoBehaviour
         if (gunBase == null) gunBase = GameObject.Find("FrontalShootPoint").GetComponent<GunBase>();
     }
 
-    private void StartShoot()
+    public void StartShoot()
     {
         if (gunBase.timer <= 0)
         {
             gunBase.Shoot(this.transform);
         }
     }
+
+    /*public void EnemyStartShoot(bool isPlayer)
+    {
+        if (isPlayer)
+            if (!isPlayer)
+            {
+                if (gunBase.timer <= 0)
+                {
+                    gunBase.Shoot(this.transform);
+                }
+            }
+    }*/
 }
