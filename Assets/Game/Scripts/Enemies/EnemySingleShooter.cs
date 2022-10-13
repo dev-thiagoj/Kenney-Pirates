@@ -6,8 +6,8 @@ public class EnemySingleShooter : MonoBehaviour
     [Header("References")]
     public GunBase gunBase;
     public GameObject enemyCannonBallPrefab;
-    public Transform player;
     public EnemyRadarTrigger radarTrigger;
+    [SerializeField] Health health;
 
     [Header("List of Guns")]
     public List<Transform> frontalGun;
@@ -17,57 +17,50 @@ public class EnemySingleShooter : MonoBehaviour
 
     [Header("Setup")]
     public float rotationSpeed = .2f;
-    //[HideInInspector] public bool canAim = false;
-    public bool canAim = false;
+
+    [Header("Checks")]
+    [SerializeField] bool canAim = false;
+    [SerializeField] bool isAlive = true;
 
     private void OnValidate()
     {
         if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
         if (radarTrigger == null) radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
-    }
-
-    private void Awake()
-    {
-        if (player == null) player = GameObject.Find("=== PLAYER ===").GetComponent<Transform>();
+        if (health == null) health = GetComponent<Health>();
     }
 
     private void Update()
     {
         if (radarTrigger.triggered == true) canAim = true;
 
-        transform.Rotate(Vector3.forward * rotationSpeed);
-
-        if (canAim)
+        if (health.isAlive)
         {
-            var left45 = (transform.up - transform.right).normalized;
-            var right45 = (transform.up + transform.right).normalized;
+            transform.Rotate(Vector3.forward * rotationSpeed);
 
-            RaycastHit2D hitFrontLeft = Physics2D.Raycast(transform.position, left45 * 5, 5, playerLayer);
-            RaycastHit2D hitFrontRight = Physics2D.Raycast(transform.position, right45 * 5, 5, playerLayer);
-            RaycastHit2D hitBackRight = Physics2D.Raycast(transform.position, -left45 * 5, 5, playerLayer);
-            //RaycastHit2D hitBackLeft = Physics2D.Raycast(transform.position, -right45 * 5, 5, playerLayer);
-
-            Debug.DrawRay(transform.position, left45 * 5, Color.magenta);
-            Debug.DrawRay(transform.position, right45 * 5, Color.magenta);
-            Debug.DrawRay(transform.position, -left45 * 5, Color.magenta);
-            //Debug.DrawRay(transform.position, -right45 * 5, Color.magenta);
-
-            if (gunBase.timer <= 0)
+            if (canAim)
             {
-                if (hitFrontLeft.collider != null)
-                {
-                    EnemyShoot(0);
-                }
+                var left45 = (transform.up - transform.right).normalized;
+                var right45 = (transform.up + transform.right).normalized;
 
-                if(hitFrontRight.collider != null)
-                {
-                    EnemyShoot(1);
-                    rotationSpeed *= -1;
-                }
+                Debug.DrawRay(transform.position, left45 * 5, Color.magenta);
+                Debug.DrawRay(transform.position, right45 * 5, Color.magenta);
+                Debug.DrawRay(transform.position, -left45 * 5, Color.magenta);
 
-                if(hitBackRight.collider != null)
+                RaycastHit2D hitFrontLeft = Physics2D.Raycast(transform.position, left45 * 5, 5, playerLayer);
+                RaycastHit2D hitFrontRight = Physics2D.Raycast(transform.position, right45 * 5, 5, playerLayer);
+                RaycastHit2D hitBackRight = Physics2D.Raycast(transform.position, -left45 * 5, 5, playerLayer);
+
+                if (gunBase.timer <= 0)
                 {
-                    rotationSpeed *= -1;
+                    if (hitFrontLeft.collider != null) EnemyShoot(0);
+
+                    if (hitFrontRight.collider != null)
+                    {
+                        EnemyShoot(1);
+                        rotationSpeed *= -1;
+                    }
+
+                    if (hitBackRight.collider != null) rotationSpeed *= -1;
                 }
             }
         }

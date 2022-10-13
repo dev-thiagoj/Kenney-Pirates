@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyRadarTrigger : MonoBehaviour
 {
-    public bool triggered = false;
+    [HideInInspector] public bool triggered = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,10 +10,5 @@ public class EnemyRadarTrigger : MonoBehaviour
         {
             triggered = true;
         }
-    }
-
-    private void Update()
-    {
-        Debug.Log(triggered);
     }
 }

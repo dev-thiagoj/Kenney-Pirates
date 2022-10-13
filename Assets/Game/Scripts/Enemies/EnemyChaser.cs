@@ -2,16 +2,24 @@ using UnityEngine;
 
 public class EnemyChaser : MonoBehaviour
 {
-    public Transform player;
-    public Rigidbody2D rb;
-    public EnemyRadarTrigger radarTrigger;
+    [Header("References")]
+    [SerializeField] Transform player;
+    [SerializeField] EnemyRadarTrigger radarTrigger;
+    [SerializeField] Health health;
+    [SerializeField] SpritesManager spritesManager;
 
-    public bool canPursuit;
+    [Header("Setup")]
+    [SerializeField] float pursuitSpeed = 1f;
+    [SerializeField] int collisionDamage = 1; 
+
+    [Header("Checks")]
+    [SerializeField] bool canPursuit;
 
     private void OnValidate()
     {
         if (radarTrigger == null) radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
-        if(rb == null) rb = GetComponent<Rigidbody2D>();
+        if (health == null) health = GetComponent<Health>();
+        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
     }
 
     private void Awake()
@@ -23,13 +31,16 @@ public class EnemyChaser : MonoBehaviour
     {
         if (radarTrigger.triggered == true) canPursuit = true;
 
-        transform.up = Vector3.Lerp(transform.up, (player.position - transform.position), 1f * Time.deltaTime);
-
-        if (canPursuit)
+        if (health.isAlive)
         {
-            var lookDirection = (player.transform.position - rb.transform.position).normalized;
+            transform.up = Vector3.Lerp(transform.up, (player.position - transform.position), 1f * Time.deltaTime);
 
-            transform.position += lookDirection * .01f;
+            if (canPursuit)
+            {
+                var lookDirection = (player.transform.position - transform.position).normalized;
+
+                transform.position += (lookDirection * pursuitSpeed) * Time.deltaTime;
+            }
         }
     }
 
@@ -37,8 +48,14 @@ public class EnemyChaser : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            Debug.Log("Implementar a troca de sprite p/ destruido");
+            var damageable = collision.transform.GetComponent<IDamageable>();
+
+            if(damageable != null)
+            {
+                damageable.Damage(collisionDamage);
+            }
+
+            health.Suicide();
         }
     }
 }

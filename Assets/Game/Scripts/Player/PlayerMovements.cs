@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMovements : MonoBehaviour
 {
     [Header("References")]
-    public CharacterController characterController;
+    [SerializeField] SpritesManager spritesManager;
+    [SerializeField] Health health;
 
     [Header("Movement Speed")]
     [Range(0, 3)] public float playerDefaultSpeed = 1f;
@@ -18,12 +19,10 @@ public class PlayerMovements : MonoBehaviour
     [Range(0, 3)] public float rotationDefaultSpeed = 2f;
     float _currRotationSpeed;
 
-    protected PlayerInputActions playerInputs;
+    [Header("Checks")]
+    public bool canMove = true;
 
-    private void OnValidate()
-    {
-        if (characterController == null) characterController = GetComponent<CharacterController>();
-    }
+    protected PlayerInputActions playerInputs;
 
     private void OnEnable()
     {
@@ -33,6 +32,12 @@ public class PlayerMovements : MonoBehaviour
     private void OnDisable()
     {
         playerInputs.PlayerInputs.Disable();
+    }
+
+    private void OnValidate()
+    {
+        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
+        if (health == null) health = GetComponent<Health>();
     }
 
     private void Awake()
@@ -48,9 +53,14 @@ public class PlayerMovements : MonoBehaviour
         Debug.Log("Fazer a aceleração e desaceleração dos barcos");
     }
 
+    private void Update()
+    {
+        if (!health.isAlive) canMove = false;
+    }
+
     private void FixedUpdate()
     {
-        PlayerMovement();
+        if (canMove) PlayerMovement();
     }
 
     private void PlayerMovement()

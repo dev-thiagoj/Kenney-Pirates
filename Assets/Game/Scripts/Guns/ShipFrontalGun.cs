@@ -32,7 +32,7 @@ public class ShipFrontalGun : MonoBehaviour
     }
 
     public void StartShoot()
-    {
+    {   
         if (gunBase.timer <= 0 && gunBase.isPlayer)
         {
             gunBase.Shoot(this.transform);

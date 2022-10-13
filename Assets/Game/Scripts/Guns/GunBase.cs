@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] Health health;
+
+    [Header("Checks")]
     public bool isPlayer;
 
     [Range(0, 5)] public float shootCooldown = 2.5f;
@@ -18,6 +22,13 @@ public class GunBase : MonoBehaviour
 
     [HideInInspector] public float timer = 0;
 
+    private void Start()
+    {
+        if (isPlayer)
+        {
+            if (health == null) health = GetComponent<Health>();
+        }
+    }
 
     private void Update()
     {
@@ -26,11 +37,16 @@ public class GunBase : MonoBehaviour
 
     public void Shoot(Transform pos)
     {
-        timer = shootCooldown;
-        var projectile = CannonBallPooler.Instance.GetPooledObject();
-        projectile.SetActive(true);
-        projectile.transform.SetPositionAndRotation(pos.position, pos.rotation);
-        StartCoroutine(VFXCoroutine(pos));
+        if (health.isAlive)
+        {
+            timer = shootCooldown;
+            var projectile = CannonBallPooler.Instance.GetPooledObject();
+            projectile.SetActive(true);
+            projectile.transform.SetPositionAndRotation(pos.position, pos.rotation);
+            StartCoroutine(VFXCoroutine(pos));
+            return;
+        }
+        return;
     }
 
     protected void PlayShootSFX()

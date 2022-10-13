@@ -1,20 +1,40 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CannonBallBase : MonoBehaviour
 {
-    public float timeToDestroy;
-
-    public int damageAmount;
+    [Header("Setup")]
+    public int damageAmount = 1;
     public float speed;
 
     [Header("Tags")]
     public List<string> tagsToHit;
     public List<string> tagsToIgnore;
 
+    [Header("VFX")]
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] GameObject hitExplosionPrefab;
+    [SerializeField] float hitExplosionDuration = .1f;
+    Vector3 _hitPoint;
+
+    private void OnValidate()
+    {
+        if(spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnBecameInvisible()
+    {
+        SetProjectileDisable();
+    }
+
     void Update()
     {
         transform.Translate(speed * Time.deltaTime * Vector3.up);
+
+        Debug.DrawRay(transform.position, transform.up / 5, Color.magenta);
     }
 
     void SetProjectileDisable()
@@ -30,6 +50,7 @@ public class CannonBallBase : MonoBehaviour
             if (collision.transform.CompareTag(t))
             {
                 var damageable = collision.transform.GetComponent<IDamageable>();
+                IdentifyHitPoint();
 
                 if (damageable != null)
                 {
@@ -45,15 +66,24 @@ public class CannonBallBase : MonoBehaviour
 
         foreach (var t in tagsToIgnore)
         {
-            if (collision.transform.CompareTag(t)) 
+            if (collision.transform.CompareTag(t))
                 return;
         }
 
-        gameObject.SetActive(false);
+        SetProjectileDisable();
     }
 
-    private void OnBecameInvisible()
+
+    void IdentifyHitPoint()
     {
-        SetProjectileDisable();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up / 5, 5, enemyLayer);
+
+        if (hit.collider != null)
+        {
+            _hitPoint = hit.point;
+
+            var localExplosion = Instantiate(hitExplosionPrefab);
+            localExplosion.transform.position = _hitPoint;
+        }
     }
 }
