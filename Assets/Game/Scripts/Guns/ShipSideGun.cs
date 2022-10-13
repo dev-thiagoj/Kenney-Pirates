@@ -6,8 +6,8 @@ public class ShipSideGun : MonoBehaviour
 {
     [SerializeField] GunBase gunBase;
 
-    [SerializeField] List<Transform> leftGunsPositions;
-    [SerializeField] List<Transform> rightGunsPositions;
+    [SerializeField] public List<Transform> leftGunsPositions;
+    [SerializeField] public List<Transform> rightGunsPositions;
 
     protected PlayerInputActions inputs;
 
@@ -24,6 +24,7 @@ public class ShipSideGun : MonoBehaviour
     void OnValidate()
     {
         if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
+        //
     }
 
     void Awake()
@@ -56,29 +57,5 @@ public class ShipSideGun : MonoBehaviour
                 }
             }
         }
-        //else return;
     }
-
-    /*IEnumerator ShootCoroutine(bool isLeftSide)
-    {
-        if (isLeftSide)
-        {
-            foreach (var cannon in leftGunsPositions)
-            {
-                var pos = cannon.transform;
-                gunBase.Shoot(pos);
-            }
-        }
-
-        if (!isLeftSide)
-        {
-            foreach (var cannon in rightGunsPositions)
-            {
-                var pos = cannon.transform;
-                gunBase.Shoot(pos);
-            }
-        }
-
-        yield return null;
-    }*/
 }

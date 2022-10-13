@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
     public bool isPlayer;
 
-    [Range(0, 5)] public float shootCooldown;
+    [Range(0, 5)] public float shootCooldown = 2.5f;
 
     [Header("VFX")]
     public GameObject shootVFX;
-    [Range(0, 1)] public float vfxDuration;
+    [Range(0, 1)] public float vfxDuration = .3f;
 
     [Header("SFX")]
     //public SFXType sfxType;
