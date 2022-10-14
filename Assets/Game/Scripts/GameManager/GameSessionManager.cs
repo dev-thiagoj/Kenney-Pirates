@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class GameSessionManager : MonoBehaviour
 {
-    [SerializeField] float sessionTime = 5;
-    [SerializeField] TextMeshProUGUI timeText;
+    public float sessionTime;
+    [SerializeField] TextMeshProUGUI timeUI;
     [SerializeField] bool isCounting = true;
 
     private void Start()
@@ -27,7 +24,7 @@ public class GameSessionManager : MonoBehaviour
         else
         {
             sessionTime = 0;
-            //TODO Endgame call
+            Actions.saveDataInPlayerPrefs.Invoke();
         }
     }
 
@@ -39,6 +36,6 @@ public class GameSessionManager : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

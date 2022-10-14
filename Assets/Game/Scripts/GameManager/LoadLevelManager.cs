@@ -5,13 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class LoadLevelManager : MonoBehaviour
 {
-    private void Awake()
+    [SerializeField] float delayToLoadEndScene = 3;
+
+    private void OnEnable()
     {
-        DontDestroyOnLoad(gameObject);
+        Actions.saveDataInPlayerPrefs += LoadEndGameSceneWithDelay;
+    }
+
+    private void OnDisable()
+    {
+        Actions.saveDataInPlayerPrefs -= LoadEndGameSceneWithDelay;
     }
 
     public void LoadScene(int i)
     {
         SceneManager.LoadScene(i);
+    }
+
+    void LoadEndGameSceneWithDelay()
+    {
+        StartCoroutine(LoadSceneWithDelayCoroutine());
+    }
+
+    IEnumerator LoadSceneWithDelayCoroutine()
+    {
+        yield return new WaitForSeconds(delayToLoadEndScene);
+        LoadScene(2);
     }
 }
