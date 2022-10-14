@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class CrewMovement : MonoBehaviour
 {
@@ -15,14 +12,13 @@ public class CrewMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //transform.DOMove(ChooseDirection(), .5f * Time.deltaTime);
         transform.position += direction * speed * Time.deltaTime;
     }
 
     void ChooseDirection()
     {
-        var directionX = Random.Range(-1, 1);
-        var directionY = Random.Range(-1, 1);
+        float directionX = Random.Range(-1, 1.1f);
+        var directionY = Random.Range(-1, 1.1f);
 
         var _direction = new Vector3(directionX, directionY, 0);
         direction = _direction;
@@ -33,6 +29,12 @@ public class CrewMovement : MonoBehaviour
     {
         float _speed = Random.Range(.1f, .3f);
         int _direction = Random.Range(-1, 2);
+        
+        if(_direction == 0)
+        {
+            RandomSpeed();
+        }
+
         float finalSpeed = _speed * _direction;
         speed = finalSpeed;
     }
