@@ -27,12 +27,12 @@ public class SpritesManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Actions.performDeathExplosion += GoDirectToDestroyedSprite;
+        Actions.performDeathExplosion += ChangeSpriteToDeath;
     }
 
     private void OnDisable()
     {
-        Actions.performDeathExplosion -= GoDirectToDestroyedSprite;
+        Actions.performDeathExplosion -= ChangeSpriteToDeath;
     }
 
     // Start is called before the first frame update
@@ -60,14 +60,12 @@ public class SpritesManager : MonoBehaviour
 
     public void ChangeSpriteToDeath()
     {
-        var index = shipHealthSprites.Count - 1;
-        StartCoroutine(PerformDeathExplosion());
-        shipSpriteRenderer.sprite = shipHealthSprites[index];
-    }
-
-    public void GoDirectToDestroyedSprite()
-    {
-        if(!health.isAlive) StartCoroutine(PerformDeathExplosion());
+        if (!health.isAlive)
+        {
+            var index = shipHealthSprites.Count - 1;
+            StartCoroutine(PerformDeathExplosion());
+            shipSpriteRenderer.sprite = shipHealthSprites[index];
+        }
     }
 
     IEnumerator PerformDeathExplosion()

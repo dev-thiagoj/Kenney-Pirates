@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBase: {fileID: 3995557202666329318}
+  audioSource: {fileID: 0}
 --- !u!1 &931465936886497747
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBase: {fileID: 3995557202666329318}
+  audioSource: {fileID: 0}
 --- !u!1 &931465936925359204
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +107,7 @@ GameObject:
   - component: {fileID: 3995557202666329318}
   - component: {fileID: 3995557202666329319}
   - component: {fileID: 3995557202666329312}
+  - component: {fileID: 4064270613842314887}
   m_Layer: 7
   m_Name: === Enemy 01 - Shooter ===
   m_TagString: Enemy
@@ -181,9 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunBase: {fileID: 3995557202666329318}
   enemyCannonBallPrefab: {fileID: 5836329692621345822, guid: bbb91edbb2da99c4193e5a84cc7b2cac, type: 3}
-  player: {fileID: 0}
   radarTrigger: {fileID: 931465937284008113}
-  spritesManager: {fileID: 3995557202666329312}
+  health: {fileID: 3995557202666329319}
   frontalGun:
   - {fileID: 931465936886497772}
   - {fileID: 931465936800612266}
@@ -205,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c629851f382dab64f9fa40e82d60d058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   isPlayer: 0
   shootCooldown: 5
   shootVFX: {fileID: 6129474724462033432, guid: efe7bc79de2bf3645a8570d7615c5849, type: 3}
@@ -222,7 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afeafcbd5f63f354aaa84910561fe67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 10
+  initialHealth: 3
+  timeToDestroy: 5
+  isAlive: 0
   _currHealth: 0
 --- !u!114 &3995557202666329312
 MonoBehaviour:
@@ -242,10 +247,31 @@ MonoBehaviour:
   - {fileID: 1925082442, guid: 690a4f9892f0db44388ec78b3d7c3cf3, type: 3}
   - {fileID: 1675865084, guid: 690a4f9892f0db44388ec78b3d7c3cf3, type: 3}
   shipSpriteRenderer: {fileID: 931465937284008112}
-  _index: 0
+  health: {fileID: 3995557202666329319}
   isFinalSprite: 0
+  _index: 0
   finalExplosionPrefab: {fileID: 5682032692134450520, guid: fb91d3dde1045094592b5e1bf1a353c9, type: 3}
   explosionDuration: 0.3
+--- !u!114 &4064270613842314887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931465936925359204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29905ff068fa994287b041b3b4fdea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crewMembersList:
+  - {fileID: 4996293379508692307, guid: f8c9f49af213b6e46bf4beb401b01379, type: 3}
+  - {fileID: 7586112815331537697, guid: 16770cccba019a343bae180077b44584, type: 3}
+  - {fileID: 8554876896958682338, guid: e392e79340138044b8e54c9aa6506308, type: 3}
+  - {fileID: 4622674069090607428, guid: 62428c3116cabc2409969484c3d6f6b1, type: 3}
+  - {fileID: 2753783020087803208, guid: c3d58d9230e3be1478fa494008cf5874, type: 3}
+  - {fileID: 6787889947179415328, guid: e6d9cc247de4b4c4a947ad51e6d96585, type: 3}
+  explosionForce: 300
 --- !u!1 &931465937284008118
 GameObject:
   m_ObjectHideFlags: 0

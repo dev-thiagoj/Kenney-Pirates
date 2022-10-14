@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7539577445053977782}
   - component: {fileID: 7539577445053977783}
   - component: {fileID: 7539577445053977780}
+  - component: {fileID: -5709909508939342502}
   m_Layer: 7
   m_Name: === Enemy 03  - Chaser ===
   m_TagString: Enemy
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7539577445053977787}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.28, y: 15.648431, z: 0.010112129}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -90,7 +91,7 @@ MonoBehaviour:
   radarTrigger: {fileID: 7539577445205287022}
   health: {fileID: 7539577445053977780}
   spritesManager: {fileID: 7539577445053977783}
-  pursuitSpeed: 1
+  pursuitSpeed: 0.9
   collisionDamage: 1
   canPursuit: 0
 --- !u!114 &7539577445053977783
@@ -132,6 +133,26 @@ MonoBehaviour:
   timeToDestroy: 5
   isAlive: 0
   _currHealth: 0
+--- !u!114 &-5709909508939342502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7539577445053977787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29905ff068fa994287b041b3b4fdea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crewMembersList:
+  - {fileID: 4996293379508692307, guid: f8c9f49af213b6e46bf4beb401b01379, type: 3}
+  - {fileID: 7586112815331537697, guid: 16770cccba019a343bae180077b44584, type: 3}
+  - {fileID: 8554876896958682338, guid: e392e79340138044b8e54c9aa6506308, type: 3}
+  - {fileID: 4622674069090607428, guid: 62428c3116cabc2409969484c3d6f6b1, type: 3}
+  - {fileID: 2753783020087803208, guid: c3d58d9230e3be1478fa494008cf5874, type: 3}
+  - {fileID: 6787889947179415328, guid: e6d9cc247de4b4c4a947ad51e6d96585, type: 3}
+  explosionForce: 300
 --- !u!1 &7539577445205287017
 GameObject:
   m_ObjectHideFlags: 0

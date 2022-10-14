@@ -17,11 +17,11 @@ public class Health : MonoBehaviour, IDamageable
 
     private void OnValidate()
     {
-        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
     }
 
     private void OnEnable()
     {
+        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
         Actions.executeDeath += Death;
     }
 
@@ -57,7 +57,8 @@ public class Health : MonoBehaviour, IDamageable
     public void Suicide()
     {
         isAlive = false;
-        spritesManager.ChangeSpriteToDeath();
+        //spritesManager.ChangeSpriteToDeath();
+        Actions.performDeathExplosion.Invoke();
     }
 
     void Death()
