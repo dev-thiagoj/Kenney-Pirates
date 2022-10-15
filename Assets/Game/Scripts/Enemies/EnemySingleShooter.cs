@@ -42,13 +42,13 @@ public class EnemySingleShooter : MonoBehaviour
                 var left45 = (transform.up - transform.right).normalized;
                 var right45 = (transform.up + transform.right).normalized;
 
-                Debug.DrawRay(transform.position, left45 * 5, Color.magenta);
-                Debug.DrawRay(transform.position, right45 * 5, Color.magenta);
-                Debug.DrawRay(transform.position, -left45 * 5, Color.magenta);
+                Debug.DrawRay(transform.position, left45 * 8, Color.magenta);
+                Debug.DrawRay(transform.position, right45 * 8, Color.magenta);
+                Debug.DrawRay(transform.position, -left45 * 8, Color.magenta);
 
-                RaycastHit2D hitFrontLeft = Physics2D.Raycast(transform.position, left45 * 5, 5, playerLayer);
-                RaycastHit2D hitFrontRight = Physics2D.Raycast(transform.position, right45 * 5, 5, playerLayer);
-                RaycastHit2D hitBackRight = Physics2D.Raycast(transform.position, -left45 * 5, 5, playerLayer);
+                RaycastHit2D hitFrontLeft = Physics2D.Raycast(transform.position, left45 * 8, 5, playerLayer);
+                RaycastHit2D hitFrontRight = Physics2D.Raycast(transform.position, right45 * 8, 5, playerLayer);
+                RaycastHit2D hitBackRight = Physics2D.Raycast(transform.position, -left45 * 8, 5, playerLayer);
 
                 if (gunBase.timer <= 0)
                 {

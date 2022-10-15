@@ -5,7 +5,9 @@ using UnityEngine;
 public class Health : MonoBehaviour, IDamageable
 {
     [Header("References")]
-    SpritesManager spritesManager;
+    [SerializeField] SpritesManager spritesManager;
+    [SerializeField] CapsuleCollider2D capsuleCollider;
+    [SerializeField] ScoreManager scoreManager;
 
     [Header("Setup")]
     public int initialHealth;
@@ -17,12 +19,14 @@ public class Health : MonoBehaviour, IDamageable
 
     private void OnValidate()
     {
+        if (capsuleCollider == null) capsuleCollider = GetComponent<CapsuleCollider2D>();
+        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
     }
 
     private void OnEnable()
     {
-        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
         Actions.executeDeath += Death;
+        if (scoreManager == null) scoreManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<ScoreManager>();
     }
 
     private void OnDisable()
@@ -43,12 +47,15 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Damage(int damage)
     {
-        _currHealth -= damage;
-        
-        if (isAlive) spritesManager.TakeDamage();
-
-        if (_currHealth <= 0)
+        if (isAlive)
         {
+            _currHealth -= damage;
+            spritesManager.TakeDamage();
+        }
+
+        if (_currHealth == 0)
+        {
+            capsuleCollider.enabled = false;
             isAlive = false;
             Actions.performDeathExplosion.Invoke();
         }
@@ -56,8 +63,8 @@ public class Health : MonoBehaviour, IDamageable
 
     public void Suicide()
     {
+        capsuleCollider.enabled = true;
         isAlive = false;
-        //spritesManager.ChangeSpriteToDeath();
         Actions.performDeathExplosion.Invoke();
     }
 
@@ -66,6 +73,12 @@ public class Health : MonoBehaviour, IDamageable
         if (!isAlive)
         {
             Destroy(gameObject, timeToDestroy);
+
+            if (transform.CompareTag("Enemy"))
+            {
+                //Actions.addPlayerPoint.Invoke();
+                //ScoreManager.
+            }
         }
         else return;
     }

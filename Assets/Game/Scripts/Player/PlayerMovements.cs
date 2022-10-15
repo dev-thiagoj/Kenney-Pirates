@@ -49,13 +49,15 @@ public class PlayerMovements : MonoBehaviour
     {
         _currPlayerSpeed = playerDefaultSpeed;
         _currRotationSpeed = rotationDefaultSpeed;
-
-        Debug.Log("Fazer a aceleração e desaceleração dos barcos");
     }
 
     private void Update()
     {
-        if (!health.isAlive) canMove = false;
+        if (!health.isAlive)
+        {
+            canMove = false;
+        }
+            
     }
 
     private void FixedUpdate()

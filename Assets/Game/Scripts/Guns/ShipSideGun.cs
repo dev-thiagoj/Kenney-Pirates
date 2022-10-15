@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class ShipSideGun : MonoBehaviour
 {
+    [Header("- References")]
     [SerializeField] GunBase gunBase;
 
+    [Header("- Lists of Cannons")]
     [SerializeField] public List<Transform> leftGunsPositions;
     [SerializeField] public List<Transform> rightGunsPositions;
+
+    [Header("- SFX")]
+    [SerializeField] List<AudioSource> audioSources;
+    [Range(1f, 10f)]
+    [SerializeField] float delayBetweenShoots;
 
     protected PlayerInputActions inputs;
 
@@ -24,7 +31,6 @@ public class ShipSideGun : MonoBehaviour
     void OnValidate()
     {
         if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
-        //
     }
 
     void Awake()
@@ -56,6 +62,17 @@ public class ShipSideGun : MonoBehaviour
                     gunBase.Shoot(pos);
                 }
             }
+
+            StartCoroutine(TripleShootSFXCoroutine());
+        }
+    }
+
+    IEnumerator TripleShootSFXCoroutine()
+    {
+        for(int i = 0; i < audioSources.Count; i++)
+        {
+            audioSources[i].Play();
+            yield return new WaitForSeconds(delayBetweenShoots/100);
         }
     }
 }

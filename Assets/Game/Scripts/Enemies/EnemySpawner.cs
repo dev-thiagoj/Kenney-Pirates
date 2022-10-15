@@ -10,12 +10,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
+        
     }
 
     private void Start()
     {
-        Debug.Log("SpawnTime: " + spawnTime);
         StartCoroutine(SpawnEnemyCoroutine());
     }
 

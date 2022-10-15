@@ -225,6 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afeafcbd5f63f354aaa84910561fe67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spritesManager: {fileID: 3995557202666329312}
+  capsuleCollider: {fileID: 3995557202666329322}
+  scoreManager: {fileID: 0}
   initialHealth: 3
   timeToDestroy: 5
   isAlive: 0
@@ -252,6 +255,7 @@ MonoBehaviour:
   _index: 0
   finalExplosionPrefab: {fileID: 5682032692134450520, guid: fb91d3dde1045094592b5e1bf1a353c9, type: 3}
   explosionDuration: 0.3
+  hasExploded: 0
 --- !u!114 &4064270613842314887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +275,7 @@ MonoBehaviour:
   - {fileID: 4622674069090607428, guid: 62428c3116cabc2409969484c3d6f6b1, type: 3}
   - {fileID: 2753783020087803208, guid: c3d58d9230e3be1478fa494008cf5874, type: 3}
   - {fileID: 6787889947179415328, guid: e6d9cc247de4b4c4a947ad51e6d96585, type: 3}
-  explosionForce: 300
+  health: {fileID: 3995557202666329319}
 --- !u!1 &931465937284008118
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +350,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1078171000, guid: 690a4f9892f0db44388ec78b3d7c3cf3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -373,7 +377,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.5
+  m_Radius: 8
 --- !u!114 &931465937284008113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,4 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93472093b420ce34880820720ac62b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radar: {fileID: 931465937284008114}
+  radarRadius: 12
   triggered: 0

@@ -17,10 +17,10 @@ public class SpritesManager : MonoBehaviour
     [Header("Death VFX")]
     [SerializeField] GameObject finalExplosionPrefab;
     [SerializeField] float explosionDuration = .3f;
+    [SerializeField] bool hasExploded;
 
     private void OnValidate()
     {
-        //if (shipReference == null) shipReference = GetComponentInChildren<Transform>();
         if (shipSpriteRenderer == null) shipSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (health == null) health = GetComponent<Health>();
     }
@@ -38,7 +38,6 @@ public class SpritesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Remover NaughtyAttributes no final");
         shipSpriteRenderer.sprite = shipHealthSprites[_index];
     }
 
@@ -51,7 +50,6 @@ public class SpritesManager : MonoBehaviour
         {
             shipSpriteRenderer.sprite = shipHealthSprites[_index];
             isFinalSprite = true;
-            StartCoroutine(PerformDeathExplosion());
             return;
         }
 
@@ -60,10 +58,11 @@ public class SpritesManager : MonoBehaviour
 
     public void ChangeSpriteToDeath()
     {
-        if (!health.isAlive)
+        if (!health.isAlive && !hasExploded)
         {
             var index = shipHealthSprites.Count - 1;
             StartCoroutine(PerformDeathExplosion());
+            hasExploded = true;
             shipSpriteRenderer.sprite = shipHealthSprites[index];
         }
     }
@@ -77,6 +76,8 @@ public class SpritesManager : MonoBehaviour
         yield return new WaitForSeconds(explosionDuration);
         Destroy(explosion);
         Actions.executeDeath.Invoke();
+        Actions.addPlayerPoint.Invoke();
+        StopCoroutine(PerformDeathExplosion());
     }
 
 }

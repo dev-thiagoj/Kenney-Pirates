@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b252827b7277498459ad337bd5cccfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 3
   damageAmount: 1
   speed: 10
   tagsToHit:

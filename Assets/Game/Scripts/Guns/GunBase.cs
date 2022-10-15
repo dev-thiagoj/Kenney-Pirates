@@ -16,10 +16,6 @@ public class GunBase : MonoBehaviour
     public GameObject shootVFX;
     [Range(0, 1)] public float vfxDuration = .3f;
 
-    [Header("SFX")]
-    //public SFXType sfxType;
-    AudioSource audioSource;
-
     [HideInInspector] public float timer = 0;
 
     private void Start()

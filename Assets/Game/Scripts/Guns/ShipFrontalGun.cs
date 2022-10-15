@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class ShipFrontalGun : MonoBehaviour
 {
-    public GunBase gunBase;
+    [Header("References")]
+    [SerializeField] GunBase gunBase;
+    [SerializeField] AudioSource audioSource;
 
     protected PlayerInputActions inputs;
 
@@ -19,6 +21,7 @@ public class ShipFrontalGun : MonoBehaviour
     private void OnValidate()
     {
         if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
+        if(audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -36,6 +39,7 @@ public class ShipFrontalGun : MonoBehaviour
         if (gunBase.timer <= 0 && gunBase.isPlayer)
         {
             gunBase.Shoot(this.transform);
+            audioSource.Play();
         }
     }
 }
