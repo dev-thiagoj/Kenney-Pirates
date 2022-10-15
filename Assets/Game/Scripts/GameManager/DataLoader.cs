@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class DataLoader : MonoBehaviour
     [Header("Enemy Spawn Time")]
     [SerializeField] EnemySpawner enemySpawner;
     [SerializeField] Slider spawnerSlider;
+
+    [Header("Player Final Score")]
+    [SerializeField] ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -39,6 +43,13 @@ public class DataLoader : MonoBehaviour
         {
             spawnerSlider.value = 10;
             enemySpawner.spawnTime = 10;
+        }
+
+        if (PlayerPrefs.HasKey("PlayerFinalScore"))
+        {
+            int localValue = PlayerPrefs.GetInt("PlayerFinalScore");
+
+            scoreManager.finalScore = localValue;
         }
     }
 }

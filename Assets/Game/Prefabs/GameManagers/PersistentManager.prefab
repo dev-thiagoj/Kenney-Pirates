@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8d280049dd7cb448bb1031e12e670b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSlider: {fileID: 5184182178591428657, guid: 2ab456884fe150343890b65449220205, type: 3}
-  spawnSlider: {fileID: 1477902316387162482, guid: 4a9be1843f4e67e49a77f7c0b307096a, type: 3}
-  confirmationBox: {fileID: 6138597238766091659, guid: 3239d5bf7e1476b43a5f35418de8c4ba, type: 3}
+  timeSlider: {fileID: 0}
+  spawnSlider: {fileID: 0}
+  confirmationBox: {fileID: 0}
 --- !u!114 &914816749606909855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,3 +78,4 @@ MonoBehaviour:
   timeSessionSlider: {fileID: 5184182178591428657, guid: 2ab456884fe150343890b65449220205, type: 3}
   enemySpawner: {fileID: 2026464972245800379, guid: b50b1e78830007c44ba181d7796a2e57, type: 3}
   spawnerSlider: {fileID: 1477902316387162482, guid: 4a9be1843f4e67e49a77f7c0b307096a, type: 3}
+  scoreManager: {fileID: 3721420744088403112, guid: a0ef76f162a4fb64488ada3b0f6ade55, type: 3}

@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95f22bfe92aead4388bfcb6d614a580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionTime: 1
-  timeUI: {fileID: 168875446871957676, guid: c73647071b0b32d4f905cc6387b1baad, type: 3}
+  sessionTime: 3
+  timeUI: {fileID: 0}
   isCounting: 1

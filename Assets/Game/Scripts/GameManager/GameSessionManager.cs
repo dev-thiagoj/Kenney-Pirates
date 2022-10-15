@@ -5,26 +5,32 @@ public class GameSessionManager : MonoBehaviour
 {
     public float sessionTime;
     [SerializeField] TextMeshProUGUI timeUI;
-    [SerializeField] bool isCounting = true;
+    [SerializeField] bool isCounting = false;
 
     private void Start()
     {
         sessionTime *= 60;
+        isCounting = true;
     }
 
     private void Update()
     {
-        if (isCounting) CountdownTime();
+        CountdownTime();
         DisplayTime(sessionTime);
     }
 
     void CountdownTime()
     {
-        if (sessionTime > 0) sessionTime -= Time.deltaTime;
-        else
+        if (isCounting)
         {
-            sessionTime = 0;
-            Actions.saveDataInPlayerPrefs.Invoke();
+            if (sessionTime > 0) 
+                sessionTime -= Time.deltaTime;
+
+            else
+            {
+                sessionTime = 0;
+                Actions.saveDataInPlayerPrefs.Invoke();
+            }
         }
     }
 

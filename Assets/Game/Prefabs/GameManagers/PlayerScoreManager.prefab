@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dc42e27984c1241b8670ae44731f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreUI: {fileID: 0}
   score: 0
-  scoreUI: {fileID: 8995577444162646318, guid: 3fe46f926200add488a56166e5cccb5f, type: 3}
+  finalScore: 0
+  finalScoreDisplay: {fileID: 6997565082013406138, guid: c7ae4d3160883c64b8bbf0b8a18e2b9f, type: 3}
