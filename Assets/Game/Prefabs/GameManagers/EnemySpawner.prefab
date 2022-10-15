@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75500db64bb43c149abe3d86a3dc0921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 13
+  spawnTime: 5
   enemiesList:
   - {fileID: 931465936925359204, guid: f1e36dc8ce16840479a442db93a3664d, type: 3}
   - {fileID: 6874823720814041479, guid: 77abe3a2304842145be28fb45b799919, type: 3}
@@ -52,12 +52,12 @@ MonoBehaviour:
   - {fileID: 2094729527850601191, guid: 9f359c11f1b1ece4397e866f4f6c6dbc, type: 3}
   - {fileID: 539466646613119315, guid: b0b033569f5b9384bb53a593d84018ab, type: 3}
   spawnPositions:
-  - {fileID: 6197991958286398821, guid: 9e2940dee4c489e4682b4bbc047dd18a, type: 3}
-  - {fileID: 8566060681881531379, guid: 47a2c0de160da264b8a9d7efb7eaa940, type: 3}
-  - {fileID: 2557409425696362026, guid: 01d5287e15642e842a81e548ba8c401e, type: 3}
-  - {fileID: 2373467017871706026, guid: 90c74b7698816464380de44f30eef78e, type: 3}
-  - {fileID: 8943637536743948304, guid: 710c65de6a766dc42b93b69eb170ada4, type: 3}
-  - {fileID: 9044800416842806681, guid: 75e3013319008454d900f50eebffca09, type: 3}
-  - {fileID: 1628343886440168289, guid: 473cdb4072f99f74b8989881d2c8ef4e, type: 3}
-  - {fileID: 7457576224037604904, guid: e30d6e717908c5b4d9b8001d1818889b, type: 3}
-  - {fileID: 2420731788774046228, guid: b5c8d819eeea0c74d930b0b30498597d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
