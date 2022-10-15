@@ -149,9 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBase: {fileID: 2306706241285218159}
-  cannonRange: 6.5
+  cannonBallPrefab: {fileID: 1926402658547533545, guid: eb15e39a250caf94ab090c167daf5dfa, type: 3}
+  canRotate: 0
+  maxAngleRotation: 0
+  speedRotation: 0
+  distanceRange: 5
   layerToShoot:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   positionToShoot: {fileID: 2306706240799687680}
-  cannonBallPrefab: {fileID: 1926402658547533545, guid: eb15e39a250caf94ab090c167daf5dfa, type: 3}

@@ -54,6 +54,7 @@ MonoBehaviour:
   tagsToIgnore:
   - Player
   - EnemyRadar
+  - PlayerTrigger
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - EnemyRadar
   - LandCannon
+  - PlayerTrigger
   layers:
   - Default
   - TransparentFX

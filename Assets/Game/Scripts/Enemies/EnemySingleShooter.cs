@@ -29,6 +29,15 @@ public class EnemySingleShooter : MonoBehaviour
         if (health == null) health = GetComponent<Health>();
     }
 
+    private void OnEnable()
+    {
+        Actions.playerDied += CheckPlayerDeath;
+    }
+    private void OnDisable()
+    {
+        Actions.playerDied -= CheckPlayerDeath;
+    }
+
     private void Update()
     {
         if (radarTrigger.triggered == true) canAim = true;
@@ -74,5 +83,10 @@ public class EnemySingleShooter : MonoBehaviour
 
         var cannonBall = Instantiate(enemyCannonBallPrefab);
         cannonBall.transform.SetPositionAndRotation(frontalGun[i].transform.position, frontalGun[i].transform.rotation);
+    }
+
+    void CheckPlayerDeath()
+    {
+        canAim = false;
     }
 }

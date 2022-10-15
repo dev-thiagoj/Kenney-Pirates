@@ -56,6 +56,7 @@ public class PlayerMovements : MonoBehaviour
         if (!health.isAlive)
         {
             canMove = false;
+            Actions.playerDied.Invoke();
         }
             
     }

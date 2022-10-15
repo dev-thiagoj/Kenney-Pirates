@@ -13,7 +13,8 @@ public class EnemyChaser : MonoBehaviour
     [SerializeField] int collisionDamage = 1; 
 
     [Header("Checks")]
-    [SerializeField] bool canPursuit;
+    [SerializeField] bool canPursuit = true;
+    bool playerLives = true;
 
     private void OnValidate()
     {
@@ -21,6 +22,17 @@ public class EnemyChaser : MonoBehaviour
         if (health == null) health = GetComponent<Health>();
         if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
     }
+
+    #region Actions
+    private void OnEnable()
+    {
+        Actions.playerDied += CheckPlayerDeath;
+    }
+    private void OnDisable()
+    {
+        Actions.playerDied -= CheckPlayerDeath;
+    }
+    #endregion
 
     private void Awake()
     {
@@ -35,7 +47,7 @@ public class EnemyChaser : MonoBehaviour
         {
             transform.up = Vector3.Lerp(transform.up, (player.position - transform.position), 1f * Time.deltaTime);
 
-            if (canPursuit)
+            if (canPursuit && playerLives)
             {
                 var lookDirection = (player.transform.position - transform.position).normalized;
 
@@ -57,5 +69,10 @@ public class EnemyChaser : MonoBehaviour
 
             health.Suicide();
         }
+    }
+
+    void CheckPlayerDeath()
+    {
+        playerLives = false;
     }
 }

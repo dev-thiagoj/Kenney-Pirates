@@ -6,12 +6,19 @@ public class EnemySpawner : MonoBehaviour
 {
     public float spawnTime;
     [SerializeField] List<GameObject> enemiesList;
-    [SerializeField] List<Transform> spawnPositions;
+    [SerializeField] List<SpawnCheckPlayerPosition> spawnPositions;
 
-    private void Awake()
+    #region Actions
+    private void OnEnable()
     {
-        
+        Actions.playerDied += StopCoroutine;
     }
+
+    private void OnDisable()
+    {
+        Actions.playerDied -= StopCoroutine;
+    }
+    #endregion
 
     private void Start()
     {
@@ -22,14 +29,24 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            int index = Random.Range(0, enemiesList.Count - 1);
-            GameObject ship = Instantiate(enemiesList[index]);
-            ship.transform.parent = GameObject.Find("=== ENEMIES ===").GetComponent<Transform>();
-
             int pos = Random.Range(0, spawnPositions.Count - 1);
-            ship.transform.position = spawnPositions[pos].position;
+            bool freePos = spawnPositions[pos].GetComponent<SpawnCheckPlayerPosition>().canSpawn;
 
-            yield return new WaitForSeconds(spawnTime);
+            if (freePos)
+            {
+                int index = Random.Range(0, enemiesList.Count - 1);
+                GameObject ship = Instantiate(enemiesList[index]);
+                ship.transform.parent = GameObject.Find("=== ENEMIES ===").GetComponent<Transform>();
+                ship.transform.position = spawnPositions[pos].transform.position;
+                yield return new WaitForSeconds(spawnTime);
+            }
+            else 
+                yield return new WaitForEndOfFrame();
         }
+    }
+
+    void StopCoroutine()
+    {
+        StopCoroutine(SpawnEnemyCoroutine());
     }
 }
