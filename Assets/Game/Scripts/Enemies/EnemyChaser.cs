@@ -43,11 +43,11 @@ public class EnemyChaser : MonoBehaviour
     {
         if (radarTrigger.triggered == true) canPursuit = true;
 
-        if (health.isAlive)
+        if (health.isAlive && playerLives)
         {
             transform.up = Vector3.Lerp(transform.up, (player.position - transform.position), 1f * Time.deltaTime);
 
-            if (canPursuit && playerLives)
+            if (canPursuit)
             {
                 var lookDirection = (player.transform.position - transform.position).normalized;
 

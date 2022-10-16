@@ -8,6 +8,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] SpritesManager spritesManager;
     [SerializeField] CapsuleCollider2D capsuleCollider;
     [SerializeField] ScoreManager scoreManager;
+    [SerializeField] HealthBarManager healthBarManager;
 
     [Header("Setup")]
     public int initialHealth;
@@ -21,8 +22,10 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (capsuleCollider == null) capsuleCollider = GetComponent<CapsuleCollider2D>();
         if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
+        if (healthBarManager == null) healthBarManager = GetComponentInChildren<HealthBarManager>();
     }
 
+    #region Actions
     private void OnEnable()
     {
         Actions.executeDeath += Death;
@@ -33,6 +36,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         Actions.executeDeath -= Death;
     }
+    #endregion
 
     void Start()
     {
@@ -51,12 +55,15 @@ public class Health : MonoBehaviour, IDamageable
         {
             _currHealth -= damage;
             spritesManager.TakeDamage();
+            if(healthBarManager != null) healthBarManager.TakeDamage();
         }
 
         if (_currHealth == 0)
         {
             capsuleCollider.enabled = false;
             isAlive = false;
+            Debug.Log("Entrou");
+            Actions.addPlayerPoint.Invoke();
             Actions.performDeathExplosion.Invoke();
         }
     }
@@ -73,12 +80,6 @@ public class Health : MonoBehaviour, IDamageable
         if (!isAlive)
         {
             Destroy(gameObject, timeToDestroy);
-
-            if (transform.CompareTag("Enemy"))
-            {
-                //Actions.addPlayerPoint.Invoke();
-                //ScoreManager.
-            }
         }
         else return;
     }

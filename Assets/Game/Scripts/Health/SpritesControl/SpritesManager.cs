@@ -25,6 +25,7 @@ public class SpritesManager : MonoBehaviour
         if (health == null) health = GetComponent<Health>();
     }
 
+    #region Actions
     private void OnEnable()
     {
         Actions.performDeathExplosion += ChangeSpriteToDeath;
@@ -34,10 +35,12 @@ public class SpritesManager : MonoBehaviour
     {
         Actions.performDeathExplosion -= ChangeSpriteToDeath;
     }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        _index = 0;
         shipSpriteRenderer.sprite = shipHealthSprites[_index];
     }
 
@@ -76,7 +79,6 @@ public class SpritesManager : MonoBehaviour
         yield return new WaitForSeconds(explosionDuration);
         Destroy(explosion);
         Actions.executeDeath.Invoke();
-        Actions.addPlayerPoint.Invoke();
         StopCoroutine(PerformDeathExplosion());
     }
 

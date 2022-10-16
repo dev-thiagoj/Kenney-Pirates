@@ -259,10 +259,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: === PLAYER ===
       objectReference: {fileID: 0}
-    - target: {fileID: 4291117732317669924, guid: e483cb32dc993834ea907748ea46d6eb, type: 3}
-      propertyPath: m_TagString
-      value: PlayerTrigger
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e483cb32dc993834ea907748ea46d6eb, type: 3}
 --- !u!1001 &192926776

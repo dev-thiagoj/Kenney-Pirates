@@ -18,6 +18,7 @@ public class ShipSideGun : MonoBehaviour
 
     protected PlayerInputActions inputs;
 
+    #region Enable Inputs
     void OnEnable()
     {
         inputs.Enable();
@@ -27,6 +28,7 @@ public class ShipSideGun : MonoBehaviour
     {
         inputs.Disable();
     }
+    #endregion
 
     void OnValidate()
     {
@@ -41,25 +43,32 @@ public class ShipSideGun : MonoBehaviour
         inputs.PlayerInputs.LeftSideTripleShoot.performed += ctx => StartShoot(true);
     }
 
-    void StartShoot(bool isLeftSide)
+    void StartShoot(bool b)
+    {
+        StartCoroutine(TripleSideShootCoroutine(b));
+    }
+
+    IEnumerator TripleSideShootCoroutine(bool isLeftSide)
     {
         if (gunBase.timer <= 0)
         {
             if (isLeftSide)
             {
-                foreach (var cannon in leftGunsPositions)
+                for (int i = 0; i < leftGunsPositions.Count; i++)
                 {
-                    var pos = cannon.transform;
-                    gunBase.Shoot(pos);
+                    var position = leftGunsPositions[i].transform;
+                    gunBase.Shoot(position);
+                    yield return new WaitForSeconds(.05f);
                 }
             }
 
             if (!isLeftSide)
             {
-                foreach (var cannon in rightGunsPositions)
+                for (int i = 0; i < rightGunsPositions.Count; i++)
                 {
-                    var pos = cannon.transform;
-                    gunBase.Shoot(pos);
+                    var position = rightGunsPositions[i].transform;
+                    gunBase.Shoot(position);
+                    yield return new WaitForSeconds(.05f);
                 }
             }
 
@@ -69,10 +78,10 @@ public class ShipSideGun : MonoBehaviour
 
     IEnumerator TripleShootSFXCoroutine()
     {
-        for(int i = 0; i < audioSources.Count; i++)
+        for (int i = 0; i < audioSources.Count; i++)
         {
             audioSources[i].Play();
-            yield return new WaitForSeconds(delayBetweenShoots/100);
+            yield return new WaitForSeconds(delayBetweenShoots / 100);
         }
     }
 }
