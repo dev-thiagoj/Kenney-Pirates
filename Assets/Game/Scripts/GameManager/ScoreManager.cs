@@ -11,7 +11,10 @@ public class ScoreManager : MonoBehaviour
     public int finalScore;
     [SerializeField] TextMeshProUGUI finalScoreDisplay;
 
+    [Header("Player Reference")]
+    [SerializeField] GunBase playerGunBase;
 
+    #region Actions
     private void OnEnable()
     {
         Actions.saveDataInPlayerPrefs += SaveScore;
@@ -23,11 +26,21 @@ public class ScoreManager : MonoBehaviour
         Actions.saveDataInPlayerPrefs -= SaveScore;
         Actions.addPlayerPoint -= AddPoint;
     }
+    #endregion
+
+    private void Awake()
+    {
+        if (GameObject.Find("=== PLAYER ==="))
+        {
+            playerGunBase = GameObject.Find("=== PLAYER ===").GetComponent<GunBase>();
+        }
+    }
 
     private void Start()
     {
         score = 0;
-        if(finalScoreDisplay != null) finalScoreDisplay.text = finalScore.ToString();
+        if (finalScoreDisplay != null)
+            finalScoreDisplay.text = finalScore.ToString();
 
         DisplayScore();
     }
@@ -35,8 +48,14 @@ public class ScoreManager : MonoBehaviour
     [NaughtyAttributes.Button]
     void AddPoint()
     {
-        score++;
-        DisplayScore();
+        if (playerGunBase != null)
+        {
+            if (playerGunBase.health.isAlive)
+            {
+                score++;
+                DisplayScore();
+            }
+        }
     }
 
     void DisplayScore()
