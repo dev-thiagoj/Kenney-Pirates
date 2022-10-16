@@ -15,8 +15,9 @@ public class SpritesManager : MonoBehaviour
     [SerializeField] int _index = 0;
 
     [Header("Death VFX")]
-    [SerializeField] GameObject finalExplosionPrefab;
+    [SerializeField] GameObject finalExplosionAnimPrefab;
     [SerializeField] float explosionDuration = .3f;
+    [SerializeField] GameObject fireAnimPrefab;
     [SerializeField] bool hasExploded;
 
     private void OnValidate()
@@ -72,9 +73,13 @@ public class SpritesManager : MonoBehaviour
 
     IEnumerator PerformDeathExplosion()
     {
-        var explosion = Instantiate(finalExplosionPrefab);
+        var explosion = Instantiate(finalExplosionAnimPrefab);
         explosion.transform.SetParent(transform);
         explosion.GameObject().transform.position = transform.position;
+        
+        var fire = Instantiate(fireAnimPrefab);
+        fire.transform.SetParent(transform);
+        fire.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
         yield return new WaitForSeconds(explosionDuration);
         Destroy(explosion);

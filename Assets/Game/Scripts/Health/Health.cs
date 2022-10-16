@@ -62,7 +62,6 @@ public class Health : MonoBehaviour, IDamageable
         {
             capsuleCollider.enabled = false;
             isAlive = false;
-            Debug.Log("Entrou");
             Actions.addPlayerPoint.Invoke();
             Actions.performDeathExplosion.Invoke();
         }

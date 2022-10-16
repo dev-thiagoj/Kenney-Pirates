@@ -116,8 +116,9 @@ MonoBehaviour:
   health: {fileID: 2094729527850601192}
   isFinalSprite: 0
   _index: 0
-  finalExplosionPrefab: {fileID: 5682032692134450520, guid: fb91d3dde1045094592b5e1bf1a353c9, type: 3}
+  finalExplosionAnimPrefab: {fileID: 8690414632555278010, guid: edd9d35d1890877428acd6ac99c23184, type: 3}
   explosionDuration: 0.3
+  fireAnimPrefab: {fileID: 3136287549743776336, guid: 26f4ced2cd1a82a4786036d0db14f678, type: 3}
   hasExploded: 0
 --- !u!114 &2094729527850601192
 MonoBehaviour:
@@ -386,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0328af20bb0b7154e9cb9b94c7b29934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   healthBarSprites:
   - {fileID: 21300000, guid: 0412fb421c3529f41b443bb132f8992b, type: 3}
   - {fileID: 21300000, guid: 98fbda70eab173449acb961c69e20efb, type: 3}
