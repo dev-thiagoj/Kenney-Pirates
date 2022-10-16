@@ -81,8 +81,6 @@ public enum SFXType
     CANNON_SHOOT,
     SHOOT_HIT,
     DEATH_EXPLOSION,
-    SCREAMS,
-    FIRE
 }
 
 [System.Serializable]

@@ -20,6 +20,9 @@ public class SpritesManager : MonoBehaviour
     [SerializeField] GameObject fireAnimPrefab;
     [SerializeField] bool hasExploded;
 
+    [Header("SFX")]
+    [SerializeField] SFXPool sfxPool;
+
     private void OnValidate()
     {
         if (shipSpriteRenderer == null) shipSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -38,14 +41,17 @@ public class SpritesManager : MonoBehaviour
     }
     #endregion
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if(sfxPool == null) sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
+    }
+
     void Start()
     {
         _index = 0;
         shipSpriteRenderer.sprite = shipHealthSprites[_index];
     }
-
-    [NaughtyAttributes.Button]
+    
     public void TakeDamage()
     {
         _index++;
@@ -76,6 +82,7 @@ public class SpritesManager : MonoBehaviour
         var explosion = Instantiate(finalExplosionAnimPrefab);
         explosion.transform.SetParent(transform);
         explosion.GameObject().transform.position = transform.position;
+        sfxPool.Play(SFXType.DEATH_EXPLOSION);
         
         var fire = Instantiate(fireAnimPrefab);
         fire.transform.SetParent(transform);
@@ -86,5 +93,4 @@ public class SpritesManager : MonoBehaviour
         Actions.executeDeath.Invoke();
         StopCoroutine(PerformDeathExplosion());
     }
-
 }

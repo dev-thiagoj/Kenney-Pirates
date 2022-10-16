@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 0}
   score: 0
-  finalScore: 0
+  finalScore: 14
   finalScoreDisplay: {fileID: 6997565082013406138, guid: c7ae4d3160883c64b8bbf0b8a18e2b9f, type: 3}
+  playerGunBase: {fileID: 0}

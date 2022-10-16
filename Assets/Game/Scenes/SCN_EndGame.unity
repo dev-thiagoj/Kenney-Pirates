@@ -33407,6 +33407,10 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 774670497}
+    - target: {fileID: 914816749606909855, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
+      propertyPath: gameSessionManager
+      value: 
+      objectReference: {fileID: 1371663281184948896, guid: 874b1fe6ab3a8a3479b0ab7e69e528f5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
 --- !u!1001 &1421951491

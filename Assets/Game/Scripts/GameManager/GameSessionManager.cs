@@ -7,6 +7,14 @@ public class GameSessionManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeUI;
     [SerializeField] bool isCounting = false;
 
+    [Header("SFX")]
+    [SerializeField] SFXManager sfxManager;
+
+    private void Awake()
+    {
+        if (sfxManager == null) sfxManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXManager>();
+    }
+
     private void Start()
     {
         sessionTime *= 60;
@@ -30,6 +38,7 @@ public class GameSessionManager : MonoBehaviour
             {
                 sessionTime = 0;
                 Actions.saveDataInPlayerPrefs.Invoke();
+                sfxManager.PlayMusicbyType(MusicType.LEVEL_WIN);
             }
         }
     }

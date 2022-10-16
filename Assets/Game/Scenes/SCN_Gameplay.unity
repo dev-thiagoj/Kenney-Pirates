@@ -61862,6 +61862,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 914816749606909853, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
+      propertyPath: delayToLoadEndScene
+      value: 5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 914816749606909855, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
       propertyPath: gameSessionManager
       value: 
@@ -62568,6 +62572,10 @@ PrefabInstance:
     - target: {fileID: 6516784050442563109, guid: 322021139b9143546a144caef52100bc, type: 3}
       propertyPath: m_Name
       value: SFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516784050442563129, guid: 322021139b9143546a144caef52100bc, type: 3}
+      propertyPath: sfxSetups.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6516784050442563130, guid: 322021139b9143546a144caef52100bc, type: 3}
       propertyPath: m_RootOrder

@@ -9,6 +9,7 @@ public class ExplosionSelfDestruction : MonoBehaviour
     private void OnEnable()
     {
         Invoke(nameof(SelfDestruction), timeToSelfDestroy);
+
     }
 
     void SelfDestruction()

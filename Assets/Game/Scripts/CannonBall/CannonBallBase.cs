@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CannonBallBase : MonoBehaviour
@@ -20,9 +18,17 @@ public class CannonBallBase : MonoBehaviour
     [SerializeField] float hitExplosionDuration = .1f;
     Vector3 _hitPoint;
 
+    [Header("SFX")]
+    [SerializeField] SFXPool sfxPool;
+
     private void OnValidate()
     {
         if(spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Awake()
+    {
+        if (sfxPool == null) sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
     }
 
     private void OnBecameInvisible()
@@ -54,10 +60,6 @@ public class CannonBallBase : MonoBehaviour
 
                 if (damageable != null)
                 {
-                    /*Vector3 dir = collision.transform.position - transform.position;
-                    dir = -dir.normalized;
-                    dir.y = 0;*/
-
                     damageable.Damage(damageAmount);
                 }
                 break;
@@ -73,7 +75,6 @@ public class CannonBallBase : MonoBehaviour
         SetProjectileDisable();
     }
 
-
     void IdentifyHitPoint()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up / 5, 5, enemyLayer);
@@ -84,6 +85,8 @@ public class CannonBallBase : MonoBehaviour
 
             var localExplosion = Instantiate(hitExplosionPrefab);
             localExplosion.transform.position = _hitPoint;
+
+            sfxPool.Play(SFXType.SHOOT_HIT);
         }
     }
 }

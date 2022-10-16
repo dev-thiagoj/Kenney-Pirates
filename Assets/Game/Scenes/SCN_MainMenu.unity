@@ -1175,7 +1175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -225.29994, y: 0.0016479492}
+  m_AnchoredPosition: {x: -225.29993, y: 0.0016479492}
   m_SizeDelta: {x: 0, y: 0.35998535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1347315354
@@ -2303,6 +2303,10 @@ PrefabInstance:
       propertyPath: confirmationBox
       value: 
       objectReference: {fileID: 1553584360}
+    - target: {fileID: 914816749606909855, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
+      propertyPath: gameSessionManager
+      value: 
+      objectReference: {fileID: 1371663281184948896, guid: 874b1fe6ab3a8a3479b0ab7e69e528f5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac9f59daf25b864888deae725d6b7f3, type: 3}
 --- !u!1001 &1477902316715983315
