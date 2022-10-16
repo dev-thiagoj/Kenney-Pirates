@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledBalls: []
   cannonBall: {fileID: 1926402658547533545, guid: 62a3a4db53fc33e459b5acd7f1bf799d, type: 3}
-  poolAmount: 10
+  poolAmount: 5

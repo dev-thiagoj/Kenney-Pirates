@@ -83,6 +83,7 @@ public class EnemySingleShooter : MonoBehaviour
 
         var cannonBall = Instantiate(enemyCannonBallPrefab);
         cannonBall.transform.SetPositionAndRotation(frontalGun[i].transform.position, frontalGun[i].transform.rotation);
+        gunBase.sfxPool.Play(SFXType.CANNON_SHOOT);
     }
 
     void CheckPlayerDeath()

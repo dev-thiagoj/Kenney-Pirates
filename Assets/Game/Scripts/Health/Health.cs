@@ -20,16 +20,20 @@ public class Health : MonoBehaviour, IDamageable
 
     private void OnValidate()
     {
-        if (capsuleCollider == null) capsuleCollider = GetComponent<CapsuleCollider2D>();
-        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
-        if (healthBarManager == null) healthBarManager = GetComponentInChildren<HealthBarManager>();
+        if (capsuleCollider == null) 
+            capsuleCollider = GetComponent<CapsuleCollider2D>();
+        if (spritesManager == null) 
+            spritesManager = GetComponent<SpritesManager>();
+        if (healthBarManager == null) 
+            healthBarManager = GetComponentInChildren<HealthBarManager>();
     }
 
     #region Actions
     private void OnEnable()
     {
         Actions.executeDeath += Death;
-        if (scoreManager == null) scoreManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<ScoreManager>();
+        if (scoreManager == null) 
+            scoreManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<ScoreManager>();
     }
 
     private void OnDisable()
@@ -46,7 +50,8 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (spritesManager.isFinalSprite == true) isAlive = false;
+        if (spritesManager.isFinalSprite == true) 
+            isAlive = false;
     }
 
     public void Damage(int damage)
@@ -55,7 +60,9 @@ public class Health : MonoBehaviour, IDamageable
         {
             _currHealth -= damage;
             spritesManager.TakeDamage();
-            if(healthBarManager != null) healthBarManager.TakeDamage();
+
+            if(healthBarManager != null) 
+                healthBarManager.TakeDamage();
         }
 
         if (_currHealth == 0)

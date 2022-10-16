@@ -5,7 +5,8 @@ using UnityEngine;
 public class GunBase : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] Health health;
+    public Health health;
+    public SFXPool sfxPool;
 
     [Header("Checks")]
     public bool isPlayer;
@@ -18,17 +19,28 @@ public class GunBase : MonoBehaviour
 
     [HideInInspector] public float timer = 0;
 
+    private void Awake()
+    {
+        if (sfxPool == null) 
+            sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
+    }
+
     private void Start()
     {
         if (isPlayer)
         {
-            if (health == null) health = GetComponent<Health>();
+            if (health == null) 
+                health = GetComponent<Health>();
         }
     }
 
     private void Update()
     {
-        if (timer > 0) timer -= Time.deltaTime;
+        if (timer > 0) 
+            timer -= Time.deltaTime;
+
+        if (isPlayer && !health.isAlive) 
+            Actions.saveDataInPlayerPrefs.Invoke();
     }
 
     public void Shoot(Transform pos)
@@ -40,6 +52,7 @@ public class GunBase : MonoBehaviour
             projectile.SetActive(true);
             projectile.transform.SetPositionAndRotation(pos.position, pos.rotation);
             StartCoroutine(VFXCoroutine(pos));
+            PlayShootSFX();
             return;
         }
         return;
@@ -47,7 +60,7 @@ public class GunBase : MonoBehaviour
 
     protected void PlayShootSFX()
     {
-        //SFXPool.Instance.Play(sfxType);
+        sfxPool.Play(SFXType.CANNON_SHOOT);
     }
 
     public IEnumerator VFXCoroutine(Transform pos)

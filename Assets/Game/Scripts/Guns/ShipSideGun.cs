@@ -11,11 +11,6 @@ public class ShipSideGun : MonoBehaviour
     [SerializeField] public List<Transform> leftGunsPositions;
     [SerializeField] public List<Transform> rightGunsPositions;
 
-    [Header("- SFX")]
-    [SerializeField] List<AudioSource> audioSources;
-    [Range(1f, 10f)]
-    [SerializeField] float delayBetweenShoots;
-
     protected PlayerInputActions inputs;
 
     #region Enable Inputs
@@ -71,17 +66,6 @@ public class ShipSideGun : MonoBehaviour
                     yield return new WaitForSeconds(.05f);
                 }
             }
-
-            StartCoroutine(TripleShootSFXCoroutine());
-        }
-    }
-
-    IEnumerator TripleShootSFXCoroutine()
-    {
-        for (int i = 0; i < audioSources.Count; i++)
-        {
-            audioSources[i].Play();
-            yield return new WaitForSeconds(delayBetweenShoots / 100);
         }
     }
 }

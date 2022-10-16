@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +6,7 @@ public class LoadLevelManager : MonoBehaviour
 {
     [SerializeField] float delayToLoadEndScene = 3;
 
+    #region Actions
     private void OnEnable()
     {
         Actions.saveDataInPlayerPrefs += LoadEndGameSceneWithDelay;
@@ -16,6 +16,7 @@ public class LoadLevelManager : MonoBehaviour
     {
         Actions.saveDataInPlayerPrefs -= LoadEndGameSceneWithDelay;
     }
+    #endregion
 
     public void LoadScene(int i)
     {

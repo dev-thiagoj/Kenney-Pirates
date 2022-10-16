@@ -84,6 +84,7 @@ public class LandCannons : MonoBehaviour
 
         var cannonBall = Instantiate(cannonBallPrefab);
         cannonBall.transform.SetPositionAndRotation(positionToShoot.position, positionToShoot.rotation);
+        gunBase.sfxPool.Play(SFXType.CANNON_SHOOT);
     }
 
     void LandCannonRotation()
