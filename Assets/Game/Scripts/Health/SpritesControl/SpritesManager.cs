@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpritesManager : MonoBehaviour
@@ -25,8 +24,10 @@ public class SpritesManager : MonoBehaviour
 
     private void OnValidate()
     {
-        if (shipSpriteRenderer == null) shipSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (health == null) health = GetComponent<Health>();
+        if (shipSpriteRenderer == null) 
+            shipSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (health == null) 
+            health = GetComponent<Health>();
     }
 
     #region Actions
@@ -43,7 +44,8 @@ public class SpritesManager : MonoBehaviour
 
     private void Awake()
     {
-        if(sfxPool == null) sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
+        if(sfxPool == null) 
+            sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
     }
 
     void Start()
@@ -66,7 +68,7 @@ public class SpritesManager : MonoBehaviour
         shipSpriteRenderer.sprite = shipHealthSprites[_index];
     }
 
-    public void ChangeSpriteToDeath()
+    void ChangeSpriteToDeath()
     {
         if (!health.isAlive && !hasExploded)
         {
@@ -79,12 +81,12 @@ public class SpritesManager : MonoBehaviour
 
     IEnumerator PerformDeathExplosion()
     {
-        var explosion = Instantiate(finalExplosionAnimPrefab);
+        GameObject explosion = Instantiate(finalExplosionAnimPrefab);
         explosion.transform.SetParent(transform);
-        explosion.GameObject().transform.position = transform.position;
+        explosion.transform.position = transform.position;
         sfxPool.Play(SFXType.DEATH_EXPLOSION);
         
-        var fire = Instantiate(fireAnimPrefab);
+        GameObject fire = Instantiate(fireAnimPrefab);
         fire.transform.SetParent(transform);
         fire.transform.SetPositionAndRotation(transform.position, transform.rotation);
 

@@ -7,6 +7,7 @@ public class ShipFrontalGun : MonoBehaviour
 
     protected PlayerInputActions inputs;
 
+    #region Enable Inputs
     private void OnEnable()
     {
         inputs.Enable();
@@ -16,10 +17,12 @@ public class ShipFrontalGun : MonoBehaviour
     {
         inputs.Disable();
     }
+    #endregion
 
     private void OnValidate()
     {
-        if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
+        if (gunBase == null) 
+            gunBase = GetComponentInParent<GunBase>();
     }
 
     private void Awake()

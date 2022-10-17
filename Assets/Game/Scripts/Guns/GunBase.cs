@@ -14,8 +14,8 @@ public class GunBase : MonoBehaviour
     [Range(0, 5)] public float shootCooldown = 2.5f;
 
     [Header("VFX")]
-    public GameObject shootVFX;
-    [Range(0, 1)] public float vfxDuration = .3f;
+    [SerializeField] GameObject shootVFX;
+    [Range(0, 1)] [SerializeField] float vfxDuration = .3f;
 
     [Header("SFX")]
     [SerializeField] SFXManager sfxManager;
@@ -24,9 +24,9 @@ public class GunBase : MonoBehaviour
 
     private void Awake()
     {
-        if (sfxPool == null) 
+        if (sfxPool == null)
             sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
-        if (sfxManager == null) 
+        if (sfxManager == null)
             sfxManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXManager>();
     }
 
@@ -34,27 +34,25 @@ public class GunBase : MonoBehaviour
     {
         if (isPlayer)
         {
-            if (health == null) 
+            if (health == null)
                 health = GetComponent<Health>();
         }
     }
 
     private void Update()
     {
-        if (timer > 0) 
+        if (timer > 0)
             timer -= Time.deltaTime;
 
         if (isPlayer && !health.isAlive)
         {
-            Actions.saveDataInPlayerPrefs.Invoke();
-
-            if(timer <= 0)
+            if (timer <= 0)
             {
-                timer = 5;
+                timer = 10;
+                Actions.saveDataInPlayerPrefs.Invoke();
                 sfxManager.PlayMusicbyType(MusicType.LEVEL_LOSE);
             }
         }
-
     }
 
     public void Shoot(Transform pos)
@@ -62,7 +60,7 @@ public class GunBase : MonoBehaviour
         if (health.isAlive)
         {
             timer = shootCooldown;
-            var projectile = CannonBallPooler.Instance.GetPooledObject();
+            GameObject projectile = CannonBallPooler.Instance.GetPooledObject();
             projectile.SetActive(true);
             projectile.transform.SetPositionAndRotation(pos.position, pos.rotation);
             StartCoroutine(VFXCoroutine(pos));
@@ -79,7 +77,7 @@ public class GunBase : MonoBehaviour
 
     public IEnumerator VFXCoroutine(Transform pos)
     {
-        var vfx = Instantiate(shootVFX).transform;
+        Transform vfx = Instantiate(shootVFX).transform;
         vfx.SetParent(pos);
         vfx.SetPositionAndRotation(pos.position, pos.rotation);
         yield return new WaitForSeconds(vfxDuration);

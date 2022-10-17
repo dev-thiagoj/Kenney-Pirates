@@ -12,7 +12,8 @@ public class GameSessionManager : MonoBehaviour
 
     private void Awake()
     {
-        if (sfxManager == null) sfxManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXManager>();
+        if (sfxManager == null) 
+            sfxManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXManager>();
     }
 
     private void Start()
@@ -36,6 +37,7 @@ public class GameSessionManager : MonoBehaviour
 
             else
             {
+                isCounting = false;
                 sessionTime = 0;
                 Actions.saveDataInPlayerPrefs.Invoke();
                 sfxManager.PlayMusicbyType(MusicType.LEVEL_WIN);

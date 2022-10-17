@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,8 @@ public class HealthBarManager : MonoBehaviour
 
     private void OnValidate()
     {
-        if (healthBarSprites == null) healthBarSpriteRenderer = GetComponent<SpriteRenderer>();
+        if (healthBarSprites == null) 
+            healthBarSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     #region Actions
@@ -32,7 +32,9 @@ public class HealthBarManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (health == null) health = GetComponentInParent<Health>();
+        if (health == null) 
+            health = GetComponentInParent<Health>();
+
         _index = 0;
         healthBarSpriteRenderer.sprite = healthBarSprites[_index];
     }
@@ -50,11 +52,11 @@ public class HealthBarManager : MonoBehaviour
         healthBarSpriteRenderer.sprite = healthBarSprites[_index];
     }
 
-    public void ChangeSpriteToDeath()
+    void ChangeSpriteToDeath()
     {
         if (!health.isAlive)
         {
-            var index = healthBarSprites.Count - 1;
+            int index = healthBarSprites.Count - 1;
             healthBarSpriteRenderer.sprite = healthBarSprites[index];
         }
     }

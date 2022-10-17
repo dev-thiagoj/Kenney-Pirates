@@ -4,12 +4,12 @@ using UnityEngine;
 public class CannonBallBase : MonoBehaviour
 {
     [Header("Setup")]
-    public int damageAmount = 1;
-    public float speed;
+    [SerializeField] int damageAmount = 1;
+    [SerializeField] float speed;
 
     [Header("Tags")]
-    public List<string> tagsToHit;
-    public List<string> tagsToIgnore;
+    [SerializeField] List<string> tagsToHit;
+    [SerializeField] List<string> tagsToIgnore;
 
     [Header("VFX")]
     [SerializeField] LayerMask enemyLayer;
@@ -23,12 +23,14 @@ public class CannonBallBase : MonoBehaviour
 
     private void OnValidate()
     {
-        if(spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer == null) 
+            spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
     {
-        if (sfxPool == null) sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
+        if (sfxPool == null) 
+            sfxPool = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<SFXPool>();
     }
 
     private void OnBecameInvisible()

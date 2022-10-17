@@ -3,13 +3,13 @@ using UnityEngine;
 public class EnemyRadarTrigger : MonoBehaviour
 {
     [SerializeField] CircleCollider2D radar;
-    [Range(5f, 15f)]
-    [SerializeField] float radarRadius = 12;
+    [Range(5f, 15f)][SerializeField] float radarRadius = 12;
     [HideInInspector] public bool triggered = false;
 
     private void OnValidate()
     {
-        if (radar == null) radar = GetComponent<CircleCollider2D>();
+        if (radar == null) 
+            radar = GetComponent<CircleCollider2D>();
     }
 
     private void Start()

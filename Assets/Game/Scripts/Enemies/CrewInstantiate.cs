@@ -9,9 +9,11 @@ public class CrewInstantiate : MonoBehaviour
 
     private void OnValidate()
     {
-        if (health == null) health = GetComponent<Health>();
+        if (health == null) 
+            health = GetComponent<Health>();
     }
 
+    #region Actions
     void OnEnable()
     {
         Actions.performDeathExplosion += StartCoroutine;
@@ -21,36 +23,34 @@ public class CrewInstantiate : MonoBehaviour
     {
         Actions.performDeathExplosion -= StartCoroutine;
     }
+    #endregion
 
     Quaternion ChooseRotation()
     {
-        var rotationZ = Random.Range(-90, 90);
-
-        var rotation = new Quaternion(0, 0, rotationZ, 0);
+        float rotationZ = Random.Range(-90f, 90f);
+        Quaternion rotation = new Quaternion(0, 0, rotationZ, 0);
         return rotation;
     }
 
     GameObject ChooseCrewMember()
     {
-        var index = Random.Range(0, crewMembersList.Count);
-        var member = crewMembersList[index];
+        int index = Random.Range(0, crewMembersList.Count);
+        GameObject member = crewMembersList[index];
         return member;
     }
 
-    [NaughtyAttributes.Button]
     public void StartCoroutine()
     {
-        if(!health.isAlive) StartCoroutine(CrewInstantiateCoroutine());
+        if(!health.isAlive) 
+            StartCoroutine(CrewInstantiateCoroutine());
     }
 
     IEnumerator CrewInstantiateCoroutine()
     {
         for (int i = 0; i < crewMembersList.Count; i++)
         {
-            var crew = Instantiate(ChooseCrewMember(), transform.position, ChooseRotation(), transform);
-
+            Instantiate(ChooseCrewMember(), transform.position, ChooseRotation(), transform);
             yield return new WaitForSeconds(.1f);
         }
-
     }
 }

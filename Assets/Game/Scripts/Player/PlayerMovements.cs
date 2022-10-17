@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour
@@ -12,9 +10,6 @@ public class PlayerMovements : MonoBehaviour
     [Range(0, 3)] public float playerDefaultSpeed = 1f;
     float _currPlayerSpeed;
 
-    [Header("Slow")]
-    public float desacelerationTime;
-
     [Header("Rotate Speed")]
     [Range(0, 3)] public float rotationDefaultSpeed = 2f;
     float _currRotationSpeed;
@@ -24,6 +19,7 @@ public class PlayerMovements : MonoBehaviour
 
     protected PlayerInputActions playerInputs;
 
+    #region Actions
     private void OnEnable()
     {
         playerInputs.PlayerInputs.Enable();
@@ -33,11 +29,14 @@ public class PlayerMovements : MonoBehaviour
     {
         playerInputs.PlayerInputs.Disable();
     }
+    #endregion
 
     private void OnValidate()
     {
-        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
-        if (health == null) health = GetComponent<Health>();
+        if (spritesManager == null) 
+            spritesManager = GetComponent<SpritesManager>();
+        if (health == null) 
+            health = GetComponent<Health>();
     }
 
     private void Awake()
@@ -57,22 +56,22 @@ public class PlayerMovements : MonoBehaviour
         {
             canMove = false;
             Actions.playerDied.Invoke();
-        }
-            
+        }   
     }
 
     private void FixedUpdate()
     {
-        if (canMove) PlayerMovement();
+        if (canMove) 
+            PlayerMovement();
     }
 
     private void PlayerMovement()
     {
         Vector2 _moveInputs = playerInputs.PlayerInputs.Movement.ReadValue<Vector2>();
         Vector2 _movement = new Vector3(0f, _moveInputs.y);
-        transform.Translate(_movement * Time.deltaTime * _currPlayerSpeed, Space.Self);
+        transform.Translate(_currPlayerSpeed * Time.deltaTime * _movement, Space.Self);
 
         float _rotate = playerInputs.PlayerInputs.Movement.ReadValue<Vector2>().x;
-        transform.Rotate(_currRotationSpeed * _rotate * Time.deltaTime * Vector3.forward * -1);
+        transform.Rotate(_currRotationSpeed * _rotate * -1 * Time.deltaTime * Vector3.forward);
     }
 }

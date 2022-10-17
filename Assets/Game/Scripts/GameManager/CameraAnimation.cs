@@ -8,7 +8,8 @@ public class CameraAnimation : MonoBehaviour
 
     private void OnValidate()
     {
-        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) 
+            animator = GetComponent<Animator>();
     }
 
     void Start()

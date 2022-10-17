@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class CannonBallPooler : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class CannonBallPooler : MonoBehaviour
     private void Start()
     {
         pooledBalls = new List<GameObject>();
+
         for (int i = 0; i < poolAmount; i++)
         {
             GameObject obj = (GameObject)Instantiate(cannonBall);

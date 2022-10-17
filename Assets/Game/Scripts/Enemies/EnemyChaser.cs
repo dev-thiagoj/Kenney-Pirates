@@ -18,9 +18,12 @@ public class EnemyChaser : MonoBehaviour
 
     private void OnValidate()
     {
-        if (radarTrigger == null) radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
-        if (health == null) health = GetComponent<Health>();
-        if (spritesManager == null) spritesManager = GetComponent<SpritesManager>();
+        if (radarTrigger == null) 
+            radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
+        if (health == null) 
+            health = GetComponent<Health>();
+        if (spritesManager == null) 
+            spritesManager = GetComponent<SpritesManager>();
     }
 
     #region Actions
@@ -36,7 +39,8 @@ public class EnemyChaser : MonoBehaviour
 
     private void Awake()
     {
-        if (player == null) player = GameObject.Find("=== PLAYER ===").GetComponent<Transform>();
+        if (player == null) 
+            player = GameObject.Find("=== PLAYER ===").GetComponent<Transform>();
     }
 
     private void Update()
@@ -49,7 +53,7 @@ public class EnemyChaser : MonoBehaviour
 
             if (canPursuit)
             {
-                var lookDirection = (player.transform.position - transform.position).normalized;
+                Vector3 lookDirection = (player.transform.position - transform.position).normalized;
 
                 transform.position += (lookDirection * pursuitSpeed) * Time.deltaTime;
             }
@@ -60,7 +64,7 @@ public class EnemyChaser : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            var damageable = collision.transform.GetComponent<IDamageable>();
+            IDamageable damageable = collision.transform.GetComponent<IDamageable>();
 
             if(damageable != null)
             {
