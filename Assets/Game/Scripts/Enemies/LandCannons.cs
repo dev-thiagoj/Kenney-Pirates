@@ -1,11 +1,7 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LandCannons : MonoBehaviour
 {
-
     [Header("References")]
     [SerializeField] GunBase gunBase;
     [SerializeField] GameObject cannonBallPrefab;
@@ -23,11 +19,12 @@ public class LandCannons : MonoBehaviour
     [Header("Checks")]
     [SerializeField] bool playerLives = true;
 
-
     private void OnValidate()
     {
-        if (gunBase == null) gunBase = GetComponent<GunBase>();
-        if (positionToShoot == null) positionToShoot = GetComponentInChildren<Transform>();
+        if (gunBase == null) 
+            gunBase = GetComponent<GunBase>();
+        if (positionToShoot == null) 
+            positionToShoot = GetComponentInChildren<Transform>();
     }
 
     #region Actions
@@ -82,14 +79,14 @@ public class LandCannons : MonoBehaviour
 
         gunBase.StartCoroutine(gunBase.VFXCoroutine(positionToShoot));
 
-        var cannonBall = Instantiate(cannonBallPrefab);
+        GameObject cannonBall = Instantiate(cannonBallPrefab);
         cannonBall.transform.SetPositionAndRotation(positionToShoot.position, positionToShoot.rotation);
         gunBase.sfxPool.Play(SFXType.CANNON_SHOOT);
     }
 
     void LandCannonRotation()
     {
-        var currRotation = transform.eulerAngles.z;
+        float currRotation = transform.eulerAngles.z;
 
         if (timer > 0) timer -= Time.deltaTime;
         transform.Rotate(new Vector3(0, 0, speedRotation * Time.deltaTime));

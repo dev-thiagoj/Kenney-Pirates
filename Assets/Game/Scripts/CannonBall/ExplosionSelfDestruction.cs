@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionSelfDestruction : MonoBehaviour
@@ -9,7 +7,6 @@ public class ExplosionSelfDestruction : MonoBehaviour
     private void OnEnable()
     {
         Invoke(nameof(SelfDestruction), timeToSelfDestroy);
-
     }
 
     void SelfDestruction()

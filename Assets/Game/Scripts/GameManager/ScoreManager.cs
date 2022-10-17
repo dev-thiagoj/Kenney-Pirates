@@ -1,11 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
     [Header("Used in Gameplay")]
     [SerializeField] TextMeshProUGUI scoreUI;
     [SerializeField] int score;
+    [SerializeField] Transform confirmationBox;
 
     [Header("Used in EndGame")]
     public int finalScore;
@@ -39,13 +41,13 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         score = 0;
+
         if (finalScoreDisplay != null)
-            finalScoreDisplay.text = finalScore.ToString();
+            finalScoreDisplay.text = "Total score: " + finalScore.ToString();
 
         DisplayScore();
     }
 
-    [NaughtyAttributes.Button]
     void AddPoint()
     {
         if (playerGunBase != null)
@@ -66,5 +68,13 @@ public class ScoreManager : MonoBehaviour
     void SaveScore()
     {
         PlayerPrefs.SetInt("PlayerFinalScore", score);
+        StartCoroutine(ConfirmationBoxCoroutine());
+    }
+
+    IEnumerator ConfirmationBoxCoroutine()
+    {
+        confirmationBox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        confirmationBox.gameObject.SetActive(false);
     }
 }

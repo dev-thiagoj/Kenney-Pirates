@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CrewMovement : MonoBehaviour
 {
-    float speed;
+    [SerializeField] float speed;
     Vector3 direction;
 
     private void Start()
@@ -12,15 +12,15 @@ public class CrewMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * direction;
     }
 
     void ChooseDirection()
     {
         float directionX = Random.Range(-1, 1.1f);
-        var directionY = Random.Range(-1, 1.1f);
+        float directionY = Random.Range(-1, 1.1f);
 
-        var _direction = new Vector3(directionX, directionY, 0);
+        Vector3 _direction = new Vector3(directionX, directionY, 0);
         direction = _direction;
         RandomSpeed();
     }

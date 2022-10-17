@@ -27,7 +27,8 @@ public class ShipSideGun : MonoBehaviour
 
     void OnValidate()
     {
-        if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
+        if (gunBase == null) 
+            gunBase = GetComponentInParent<GunBase>();
     }
 
     void Awake()
@@ -51,7 +52,7 @@ public class ShipSideGun : MonoBehaviour
             {
                 for (int i = 0; i < leftGunsPositions.Count; i++)
                 {
-                    var position = leftGunsPositions[i].transform;
+                    Transform position = leftGunsPositions[i].transform;
                     gunBase.Shoot(position);
                     yield return new WaitForSeconds(.05f);
                 }
@@ -61,7 +62,7 @@ public class ShipSideGun : MonoBehaviour
             {
                 for (int i = 0; i < rightGunsPositions.Count; i++)
                 {
-                    var position = rightGunsPositions[i].transform;
+                    Transform position = rightGunsPositions[i].transform;
                     gunBase.Shoot(position);
                     yield return new WaitForSeconds(.05f);
                 }

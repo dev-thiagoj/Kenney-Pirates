@@ -4,19 +4,19 @@ using UnityEngine;
 public class EnemySingleShooter : MonoBehaviour
 {
     [Header("References")]
-    public GunBase gunBase;
-    public GameObject enemyCannonBallPrefab;
-    public EnemyRadarTrigger radarTrigger;
+    [SerializeField] GunBase gunBase;
+    [SerializeField] GameObject enemyCannonBallPrefab;
+    [SerializeField] EnemyRadarTrigger radarTrigger;
     [SerializeField] Health health;
 
     [Header("List of Guns")]
-    public List<Transform> frontalGun;
+    [SerializeField] List<Transform> frontalGun;
 
     [Header("Layer Reference")]
-    public LayerMask playerLayer;
+    [SerializeField] LayerMask playerLayer;
 
     [Header("Setup")]
-    public float rotationSpeed = .2f;
+    [SerializeField] float rotationSpeed = .2f;
 
     [Header("Checks")]
     [SerializeField] bool canAim = false;
@@ -24,11 +24,15 @@ public class EnemySingleShooter : MonoBehaviour
 
     private void OnValidate()
     {
-        if (gunBase == null) gunBase = GetComponentInParent<GunBase>();
-        if (radarTrigger == null) radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
-        if (health == null) health = GetComponent<Health>();
+        if (gunBase == null) 
+            gunBase = GetComponentInParent<GunBase>();
+        if (radarTrigger == null) 
+            radarTrigger = GetComponentInChildren<EnemyRadarTrigger>();
+        if (health == null) 
+            health = GetComponent<Health>();
     }
 
+    #region Actions
     private void OnEnable()
     {
         Actions.playerDied += CheckPlayerDeath;
@@ -37,6 +41,7 @@ public class EnemySingleShooter : MonoBehaviour
     {
         Actions.playerDied -= CheckPlayerDeath;
     }
+    #endregion
 
     private void Update()
     {
@@ -48,8 +53,8 @@ public class EnemySingleShooter : MonoBehaviour
 
             if (canAim)
             {
-                var left45 = (transform.up - transform.right).normalized;
-                var right45 = (transform.up + transform.right).normalized;
+                Vector3 left45 = (transform.up - transform.right).normalized;
+                Vector3 right45 = (transform.up + transform.right).normalized;
 
                 Debug.DrawRay(transform.position, left45 * 8, Color.magenta);
                 Debug.DrawRay(transform.position, right45 * 8, Color.magenta);
@@ -81,7 +86,7 @@ public class EnemySingleShooter : MonoBehaviour
 
         gunBase.StartCoroutine(gunBase.VFXCoroutine(frontalGun[i].transform));
 
-        var cannonBall = Instantiate(enemyCannonBallPrefab);
+        GameObject cannonBall = Instantiate(enemyCannonBallPrefab);
         cannonBall.transform.SetPositionAndRotation(frontalGun[i].transform.position, frontalGun[i].transform.rotation);
         gunBase.sfxPool.Play(SFXType.CANNON_SHOOT);
     }

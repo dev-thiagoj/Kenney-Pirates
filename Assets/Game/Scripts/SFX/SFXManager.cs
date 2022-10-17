@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,21 +6,12 @@ public class SFXManager : MonoBehaviour
     [Header("References")]
     public List<MusicSetup> musicSetups;
     public List<SFXSetup> sfxSetups;
-    public AudioSource musicSource;
-
-    /*[Header("Sound On/Off")]
-    public GameObject buttonSoundOff;
-    public GameObject buttonSoundOn;*/
+    [SerializeField] AudioSource musicSource;
 
     private void OnValidate()
     {
-        if (musicSource == null) musicSource = GetComponent<AudioSource>();
-    }
-
-    private void Awake()
-    {
-        //buttonSoundOff.SetActive(false);
-        //buttonSoundOn.SetActive(true);
+        if (musicSource == null) 
+            musicSource = GetComponent<AudioSource>();
     }
 
     public void PlayMusicbyType(MusicType musicType)
@@ -40,22 +30,6 @@ public class SFXManager : MonoBehaviour
     public SFXSetup GetSFXByType(SFXType sfxType)
     {
         return sfxSetups.Find(i => i.sfxType == sfxType);
-    }
-
-    public void TurnMusicOff()
-    {
-        musicSource.enabled = false;
-        musicSource.Pause();
-        //buttonSoundOn.SetActive(false);
-        //buttonSoundOff.SetActive(true);
-    }
-
-    public void TurnMusicOn()
-    {
-        musicSource.enabled = true;
-        musicSource.Play();
-        //buttonSoundOff.SetActive(false);
-        //buttonSoundOn.SetActive(true);
     }
 }
 

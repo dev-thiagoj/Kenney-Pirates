@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +5,15 @@ public class SFXPool : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] SFXManager sfxManager;
+    [SerializeField] int poolSize = 10;
     
-    public int poolSize = 10;
-
     private List<AudioSource> _audioSourcesList;
     private int _index = 0;
 
     private void OnValidate()
     {
-        if (sfxManager == null) sfxManager = GetComponent<SFXManager>();
+        if (sfxManager == null) 
+            sfxManager = GetComponent<SFXManager>();
     }
 
     private void Awake()
@@ -59,6 +58,5 @@ public class SFXPool : MonoBehaviour
 
         _audioSourcesList[_index].clip = click.audioClip;
         _audioSourcesList[_index].Play();
-
     }
 }

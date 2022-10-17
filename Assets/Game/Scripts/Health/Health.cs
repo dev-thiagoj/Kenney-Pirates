@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable
@@ -11,7 +9,7 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] HealthBarManager healthBarManager;
 
     [Header("Setup")]
-    public int initialHealth;
+    [SerializeField] int initialHealth;
     [SerializeField] float timeToDestroy = 5;
 
     [Header("Checks")]
@@ -28,10 +26,10 @@ public class Health : MonoBehaviour, IDamageable
             healthBarManager = GetComponentInChildren<HealthBarManager>();
     }
 
-    #region Actions
     private void OnEnable()
     {
         Actions.executeDeath += Death;
+
         if (scoreManager == null) 
             scoreManager = GameObject.Find("=== MANAGERS ===").GetComponentInChildren<ScoreManager>();
     }
@@ -40,7 +38,6 @@ public class Health : MonoBehaviour, IDamageable
     {
         Actions.executeDeath -= Death;
     }
-    #endregion
 
     void Start()
     {
@@ -87,6 +84,7 @@ public class Health : MonoBehaviour, IDamageable
         {
             Destroy(gameObject, timeToDestroy);
         }
-        else return;
+        else 
+            return;
     }
 }
